@@ -1,0 +1,17 @@
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\bin\Debug\netcoreapp2.0\ECodeWorld.Tests.deps.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\bin\Debug\netcoreapp2.0\ECodeWorld.Tests.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\obj\Debug\netcoreapp2.0\ECodeWorld.Tests.csproj.CoreCompileInputs.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\obj\Debug\netcoreapp2.0\ECodeWorld.Tests.AssemblyInfoInputs.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\obj\Debug\netcoreapp2.0\ECodeWorld.Tests.AssemblyInfo.cs
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\bin\Debug\netcoreapp2.0\ECodeWorld.Tests.runtimeconfig.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\bin\Debug\netcoreapp2.0\ECodeWorld.Tests.runtimeconfig.dev.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\obj\Debug\netcoreapp2.0\ECodeWorld.Tests.csprojAssemblyReference.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\bin\Debug\netcoreapp2.0\xunit.runner.visualstudio.dotnetcore.testadapter.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\bin\Debug\netcoreapp2.0\xunit.runner.reporters.netcoreapp10.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\bin\Debug\netcoreapp2.0\xunit.runner.utility.netcoreapp10.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\bin\Debug\netcoreapp2.0\ECodeWorld.Tests.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\obj\Debug\netcoreapp2.0\ECodeWorld.Tests.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\obj\Debug\netcoreapp2.0\ECodeWorld.Tests.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\bin\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\bin\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Tests\obj\Debug\netcoreapp2.0\ECodeWorld.Tests.csproj.CopyComplete

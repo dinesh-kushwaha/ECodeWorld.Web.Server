@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>ECodeWorld.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{36171a05-b29f-4c24-97d8-e0a9a27affa0}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql100DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>ECodeWorld.Database</RootNamespace>
+    <AssemblyName>ECodeWorld.Database</AssemblyName>
+    <ModelCollation>1033, CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="Scripts" />
+    <Folder Include="Scripts\Post-Deployment" />
+    <Folder Include="Scripts\Pre-Deployment" />
+    <Folder Include="dbo" />
+    <Folder Include="dbo\Tables" />
+    <Folder Include="dbo\Tables\Users" />
+    <Folder Include="dbo\Tables\Posts" />
+    <Folder Include="Scripts\Post-Deployment\DataLoad" />
+    <Folder Include="dbo\StoredProcedures" />
+    <Folder Include="dbo\Functions" />
+    <Folder Include="dbo\Tables\Masters" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Users\AccessLevels.sql" />
+    <Build Include="dbo\Tables\Users\AccountPlanLevels.sql" />
+    <Build Include="dbo\Tables\Users\Accounts.sql" />
+    <Build Include="dbo\Tables\Users\Companies.sql" />
+    <Build Include="dbo\Tables\Users\Memberships.sql" />
+    <Build Include="dbo\Tables\Users\Roles.sql" />
+    <Build Include="dbo\Tables\Users\Users.sql" />
+    <Build Include="dbo\Tables\Posts\Comments.sql" />
+    <Build Include="dbo\Tables\Posts\LikesCounters.sql" />
+    <Build Include="dbo\Tables\Posts\Posts.sql" />
+    <Build Include="dbo\Tables\Users\Logins.sql" />
+    <Build Include="dbo\Tables\Users\Qualifications.sql" />
+    <Build Include="dbo\Tables\Users\UserQualifications.sql" />
+    <Build Include="dbo\Tables\Users\Universities.sql" />
+    <Build Include="dbo\Tables\Users\Certifications.sql" />
+    <Build Include="dbo\Tables\Users\UserCertifications.sql" />
+    <Build Include="dbo\Tables\Users\UserProfiles.sql" />
+    <Build Include="dbo\Tables\Users\UsersAddress.sql" />
+    <Build Include="dbo\Tables\Masters\Countries.sql" />
+    <Build Include="dbo\Tables\Masters\States.sql" />
+    <Build Include="dbo\Tables\Masters\Cities.sql" />
+    <Build Include="dbo\Tables\Masters\ZipCodes.sql" />
+    <Build Include="dbo\Tables\Posts\PostsImages.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.Logins.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.PostCategories.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.PostStatus.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.PostTypes.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.Users.Table.sql" />
+    <Build Include="dbo\Tables\Posts\TempPosts.sql" />
+    <Build Include="dbo\Tables\Posts\TempPosts_ML.sql" />
+    <Build Include="dbo\Tables\Posts\Posts_ML.sql" />
+    <Build Include="dbo\Tables\Masters\PostStatus.sql" />
+    <Build Include="dbo\Tables\Masters\PostTypes.sql" />
+    <Build Include="dbo\Tables\Masters\PostCategories.sql" />
+    <Build Include="dbo\Tables\Masters\ComplexityLevels.sql" />
+    <Build Include="dbo\Tables\Masters\Languages.sql" />
+    <Build Include="dbo\Tables\Masters\PostCategories_ML.sql" />
+    <Build Include="dbo\Tables\Masters\PostStatus_ML.sql" />
+    <Build Include="dbo\Tables\Masters\PostTypes_ML.sql" />
+    <Build Include="dbo\Tables\Masters\ComplexityLevels_ML.sql" />
+    <Build Include="dbo\Tables\Masters\Countries_ML.sql" />
+    <Build Include="dbo\Tables\Masters\States_ML.sql" />
+    <Build Include="dbo\Tables\Masters\Cities_ML.sql" />
+    <Build Include="dbo\Tables\Posts\PostReviews.sql" />
+    <Build Include="dbo\Tables\Posts\PostReviews_ML.sql" />
+    <Build Include="dbo\Tables\Posts\Comments_ML.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="ECodeWorld.Database.refactorlog" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="Scripts\Pre-Deployment\Script.PreDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\Post-Deployment\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ECodeWorld.Database.publish.xml" />
+  </ItemGroup>
+  <Target Name="PreDeployEvent">
+    <Message Importance="high" Text="Pre deployment event" />
+  </Target>
+  <Target Name="PostDeployEvent">
+    <Message Importance="high" Text="Post deployment event" />
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent />
+  </PropertyGroup>
+</Project>

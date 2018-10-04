@@ -1,0 +1,11 @@
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.csproj.CoreCompileInputs.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.AssemblyInfoInputs.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.AssemblyInfo.cs
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.deps.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.runtimeconfig.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.runtimeconfig.dev.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Infrastructure\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.csprojAssemblyReference.cache

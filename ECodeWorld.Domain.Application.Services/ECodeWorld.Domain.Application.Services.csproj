@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>ECodeWorld.Domain.Application.Services.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="7.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Ninject" Version="3.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ECodeWorld.Domain.Application.Specifications\ECodeWorld.Domain.Application.Specifications.csproj" />
+    <ProjectReference Include="..\ECodeWorld.Domain.CrossCutting.Adapters\ECodeWorld.Domain.CrossCutting.Adapters.csproj" />
+    <ProjectReference Include="..\ECodeWorld.Domain.CrossCutting.Security\ECodeWorld.Domain.CrossCutting.Security.csproj" />
+    <ProjectReference Include="..\ECodeWorld.Domain.Dtos\ECodeWorld.Domain.Dtos.csproj" />
+    <ProjectReference Include="..\ECodeWorld.Domain.Entities\ECodeWorld.Domain.Entities.csproj" />
+    <ProjectReference Include="..\ECodeWorld.Domain.Infrastructure.Repositories\ECodeWorld.Domain.Infrastructure.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

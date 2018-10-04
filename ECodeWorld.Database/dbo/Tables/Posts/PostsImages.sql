@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[PostsImages]
+(
+	[ID] INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_PostsImages PRIMARY KEY, 
+	[PostID] [int] NOT NULL CONSTRAINT FK_PostsImagesPosts FOREIGN KEY REFERENCES Posts(ID),
+	[URL] [varchar](1000) NULL,
+	[Status] [int] NOT NULL DEFAULT 0,
+	[Date] [Date] NOT NULL DEFAULT GETDATE()
+)

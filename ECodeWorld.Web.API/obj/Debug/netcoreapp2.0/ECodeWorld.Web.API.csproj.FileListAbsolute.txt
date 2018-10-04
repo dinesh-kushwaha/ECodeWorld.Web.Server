@@ -1,0 +1,44 @@
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Web.API.deps.json
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Web.API.runtimeconfig.json
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Web.API.runtimeconfig.dev.json
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Web.API.dll
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.csprojAssemblyReference.cache
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.csproj.CoreCompileInputs.cache
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.AssemblyInfoInputs.cache
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.AssemblyInfo.cs
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Web.API.pdb
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.dll
+C:\projects\www\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.csprojAssemblyReference.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.csproj.CoreCompileInputs.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.AssemblyInfoInputs.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.AssemblyInfo.cs
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Web.API.deps.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Web.API.runtimeconfig.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Web.API.runtimeconfig.dev.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Web.API.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Web.API.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Application.Services.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Application.Specifications.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.DIResolver.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Security.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Specifications.Core.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Dtos.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Entities.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.Repositories.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Application.Services.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Application.Services.dll.config
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.DIResolver.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.DIResolver.dll.config
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Dtos.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.Repositories.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Infrastructure.Repositories.dll.config
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Application.Specifications.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Security.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Specifications.Core.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.Entities.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.csproj.CopyComplete
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\obj\Debug\netcoreapp2.0\ECodeWorld.Web.API.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Adapters.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Web.API\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Adapters.pdb

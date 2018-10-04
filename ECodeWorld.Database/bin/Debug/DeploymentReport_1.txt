@@ -1,0 +1,35 @@
+﻿** Highlights
+     Tables that will be rebuilt
+       None
+     Clustered indexes that will be dropped
+       None
+     Clustered indexes that will be created
+       None
+     Possible data issues
+       None
+
+** User actions
+     Create
+       [dbo].[AccessLevels] (Table)
+       [dbo].[AccountPlanLevels] (Table)
+       [dbo].[Accounts] (Table)
+       [dbo].[Authors] (Table)
+       [dbo].[Comments] (Table)
+       [dbo].[Companies] (Table)
+       [dbo].[LikesCounter] (Table)
+       [dbo].[Logins] (Table)
+       [dbo].[Memberships] (Table)
+       [dbo].[Posts] (Table)
+       [dbo].[Roles] (Table)
+       [dbo].[Users] (Table)
+       [dbo].[FK_AccountsPlanLevels] (Foreign Key)
+       [dbo].[FK_CompaniesAccessLevels] (Foreign Key)
+       [dbo].[FK_CompaniesAccounts] (Foreign Key)
+       [dbo].[FK_LoginsUsers] (Foreign Key)
+       [dbo].[FK_MembershipsUsers] (Foreign Key)
+       [dbo].[FK_MembershipsCompanies] (Foreign Key)
+       [dbo].[FK_MembershipsRoles] (Foreign Key)
+       [dbo].[FNVerifyAccount] (Function)
+       [dbo].[SPCreateLogins] (Procedure)
+
+** Supporting actions

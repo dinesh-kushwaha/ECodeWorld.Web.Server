@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[Users]
+(
+	[ID] INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Users PRIMARY KEY, 
+    [FirstName] VARCHAR(50) NULL, 
+    [LastName] VARCHAR(50) NULL, 
+    [UserName] VARCHAR(50) NULL,
+	[DisplayName] VARCHAR(50) NULL,
+	[Date] [Date] NOT NULL DEFAULT GETDATE()
+)

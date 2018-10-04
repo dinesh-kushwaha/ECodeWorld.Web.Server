@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>ECodeWorld.Domain.CrossCutting.DIResolver.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
+    <PackageReference Include="Ninject" Version="3.3.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ECodeWorld.Domain.Application.Services\ECodeWorld.Domain.Application.Services.csproj" />
+    <ProjectReference Include="..\ECodeWorld.Domain.CrossCutting.Adapters\ECodeWorld.Domain.CrossCutting.Adapters.csproj" />
+    <ProjectReference Include="..\ECodeWorld.Domain.Infrastructure.Repositories\ECodeWorld.Domain.Infrastructure.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ECodeWorld.Domain.CrossCutting.Specifications\ECodeWorld.Domain.CrossCutting.Specifications.Core.csproj" />
+    <ProjectReference Include="..\ECodeWorld.Domain.Dtos\ECodeWorld.Domain.Dtos.csproj" />
+    <ProjectReference Include="..\ECodeWorld.Domain.Infrastructure.Repositories\ECodeWorld.Domain.Infrastructure.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

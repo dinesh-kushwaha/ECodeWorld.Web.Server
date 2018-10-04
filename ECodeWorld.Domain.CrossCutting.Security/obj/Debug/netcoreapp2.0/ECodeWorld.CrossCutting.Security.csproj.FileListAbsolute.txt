@@ -1,0 +1,9 @@
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.CrossCutting\bin\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.deps.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.CrossCutting\bin\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.CrossCutting\bin\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.CrossCutting\obj\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.csprojAssemblyReference.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.CrossCutting\obj\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.csproj.CoreCompileInputs.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.CrossCutting\obj\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.AssemblyInfoInputs.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.CrossCutting\obj\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.AssemblyInfo.cs
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.CrossCutting\obj\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.CrossCutting\obj\Debug\netcoreapp2.0\ECodeWorld.CrossCutting.Security.pdb

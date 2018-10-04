@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Cities_ML]
+(
+	[ID] INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Cities_ML PRIMARY KEY, 
+	[CitiesID] [int] CONSTRAINT FK_Cities_MLCities FOREIGN KEY REFERENCES Cities(ID),
+	[LanguageID] [int] CONSTRAINT FK_Cities_MLLanguages FOREIGN KEY REFERENCES Languages(ID),
+	[Name] VARCHAR(50) NULL,
+	[Code] VARCHAR(50) NULL,
+	[ISOCode] VARCHAR(50) NULL,
+	CONSTRAINT UC_UniqueCitiesLanguage UNIQUE (CitiesID,LanguageID)
+)

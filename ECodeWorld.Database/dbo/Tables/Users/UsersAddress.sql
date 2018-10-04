@@ -1,0 +1,13 @@
+﻿CREATE TABLE [dbo].[UsersAddress]
+(
+	[ID] INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Address PRIMARY KEY, 
+	[Address1] VARCHAR(150) NOT NULL, 
+    [Address2] VARCHAR(150) NULL, 
+	[Address3] VARCHAR(150) NULL, 
+	[CityID] INT NULL, 
+	[StateID] INT NULL, 
+	[CountryID] INT NULL, 
+	[PostalCode] INT NULL, 
+	[UsersID] INT CONSTRAINT FK_UsersAddress FOREIGN KEY REFERENCES Users(ID),
+	[Date] [Date] NOT NULL DEFAULT GETDATE()
+)

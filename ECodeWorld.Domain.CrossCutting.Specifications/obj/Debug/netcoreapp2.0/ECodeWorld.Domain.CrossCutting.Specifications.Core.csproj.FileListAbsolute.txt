@@ -1,0 +1,8 @@
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Domain.CrossCutting.Specifications\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Specifications.Core.deps.json
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Domain.CrossCutting.Specifications\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Specifications.Core.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Domain.CrossCutting.Specifications\bin\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Specifications.Core.pdb
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Domain.CrossCutting.Specifications\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Specifications.Core.csproj.CoreCompileInputs.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Domain.CrossCutting.Specifications\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Specifications.Core.AssemblyInfoInputs.cache
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Domain.CrossCutting.Specifications\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Specifications.Core.AssemblyInfo.cs
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Domain.CrossCutting.Specifications\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Specifications.Core.dll
+C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Domain.CrossCutting.Specifications\obj\Debug\netcoreapp2.0\ECodeWorld.Domain.CrossCutting.Specifications.Core.pdb
