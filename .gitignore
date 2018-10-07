@@ -288,3 +288,7 @@ __pycache__/
 
 # Windows thumbnail cache files
 Thumbs.db
+
+
+# BBML Files
+.dbmdl
