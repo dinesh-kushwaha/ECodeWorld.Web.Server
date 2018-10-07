@@ -332,3 +332,7 @@ ASALocalRun/
 
 # Local History for Visual Studio
 .localhistory/
+
+#Visual Studio DB Project
+*.dbmdl
+[Ss]ql/
