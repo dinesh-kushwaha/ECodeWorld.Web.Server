@@ -1,9 +1,0 @@
-C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Application.Services\bin\Debug\netcoreapp2.0\ECodeWorld.Application.Services.deps.json
-C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Application.Services\bin\Debug\netcoreapp2.0\ECodeWorld.Application.Services.dll
-C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Application.Services\bin\Debug\netcoreapp2.0\ECodeWorld.Application.Services.pdb
-C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Application.Services\obj\Debug\netcoreapp2.0\ECodeWorld.Application.Services.csproj.CoreCompileInputs.cache
-C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Application.Services\obj\Debug\netcoreapp2.0\ECodeWorld.Application.Services.AssemblyInfoInputs.cache
-C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Application.Services\obj\Debug\netcoreapp2.0\ECodeWorld.Application.Services.AssemblyInfo.cs
-C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Application.Services\obj\Debug\netcoreapp2.0\ECodeWorld.Application.Services.dll
-C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Application.Services\obj\Debug\netcoreapp2.0\ECodeWorld.Application.Services.pdb
-C:\IMP\www\ECodeWorld Projects\ECodeWorld Projects\server\ECodeWorld\ECodeWorld.Application.Services\obj\Debug\netcoreapp2.0\ECodeWorld.Application.Services.csprojAssemblyReference.cache
