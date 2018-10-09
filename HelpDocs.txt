@@ -148,3 +148,11 @@ getBooksAfterFilter(catg: string, wtr: string): Observable<Book[]> {
 	.map(this.extractData)
 	.catch(this.handleError);
 }
+
+simply making entry in gitignore may not ingore files, you may need to commit it. I used the following method and worked for me
+[git rm -r --cached .]
+[git add .]
+then
+[git commit -am "Remove ignored files"]
+
+However this ignore my scripts folder which I included later into repository.
