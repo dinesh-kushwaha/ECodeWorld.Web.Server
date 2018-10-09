@@ -7,6 +7,7 @@ using ECodeWorld.Domain.Dtos.Message;
 using ECodeWorld.Domain.Dtos.Users;
 using ECodeWorld.Domain.Entities.Models;
 using ECodeWorld.Domain.Infrastructure.Repositories.Authentication;
+using ECodeWorld.Domain.Infrastructure.Repositories.User;
 using System.Threading.Tasks;
 
 namespace ECodeWorld.Domain.Application.Services.Authentication
@@ -14,9 +15,12 @@ namespace ECodeWorld.Domain.Application.Services.Authentication
     public class AuthenticationService : ServiceBase, IAuthenticationService
     {
         private readonly ILoginRepository loginRepository;
-        public AuthenticationService(ILoginRepository _loginRepository)
+        private readonly IUserRepository userRepository;
+        public AuthenticationService(ILoginRepository loginRepository,
+            IUserRepository userRepository)
         {
-            this.loginRepository = _loginRepository;
+            this.loginRepository = loginRepository;
+            this.userRepository = userRepository;
         }
 
         public async Task<ResponseDto> CreateUserLogin(UserDto userDto)
@@ -39,7 +43,7 @@ namespace ECodeWorld.Domain.Application.Services.Authentication
                 if (userId <= 0)
                     authenticationDto.AddRule("userDto", "Server Error.");
             }
-          
+
             return authenticationDto;
         }
 
@@ -60,7 +64,14 @@ namespace ECodeWorld.Domain.Application.Services.Authentication
             else
             {
                 authenticationDto.IsAuthenticated = true;
-                authenticationDto.AddRule("Success", "Authentication is successfull.");
+                var userProfile = await this.userRepository.GetUserProfileById((int)userLogin?.UsersId);
+                if (userProfile != null)
+                {
+                    authenticationDto.Id = (int)userProfile?.UsersId;
+                    authenticationDto.Name = string.IsNullOrWhiteSpace(userProfile.DisplayName) ?
+                        userProfile.LastName + "," + userProfile.FirstName : userProfile.DisplayName;
+                }
+                    authenticationDto.AddRule("Success", "Authentication is successfull.");
             }
             return authenticationDto;
         }

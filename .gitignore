@@ -336,3 +336,4 @@ ASALocalRun/
 #Visual Studio DB Project
 *.dbmdl
 [Ss]ql/
+/ECodeWorld.Web.API/wwwroot/static/images/10_09_2018

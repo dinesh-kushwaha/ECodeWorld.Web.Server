@@ -2,6 +2,7 @@
 using ECodeWorld.Domain.Dtos.Authentication;
 using ECodeWorld.Domain.Dtos.Users;
 using ECodeWorld.Domain.Infrastructure.Repositories.Authentication;
+using ECodeWorld.Domain.Infrastructure.Repositories.User;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,8 @@ namespace ECodeWorld.Domain.Tests.Services
 
             //string con = (string)configuration.GetValue(typeof(string), "MyLegacyDb");
             ILoginRepository loginRepository = new LoginRepository();
-            IAuthenticationService authenticationService = new AuthenticationService(loginRepository);
+            IUserRepository userRepository = new UserRepository();
+            IAuthenticationService authenticationService = new AuthenticationService(loginRepository, userRepository);
 
             string userName = "2kush.dinesh@gmail.com";
             string password = "P@ssw0rd";
@@ -41,7 +43,8 @@ namespace ECodeWorld.Domain.Tests.Services
             string password = "P@ssw0rd";
 
             ILoginRepository loginRepository = new LoginRepository();
-            IAuthenticationService authenticationService = new AuthenticationService(loginRepository);
+            IUserRepository userRepository = new UserRepository();
+            IAuthenticationService authenticationService = new AuthenticationService(loginRepository, userRepository);
 
             var resp = authenticationService.CreateUserLogin(new UserDto { UserName = userName, Password = password });
             //Assert.True(resp.IsAuthenticated);

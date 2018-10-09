@@ -7,6 +7,7 @@ namespace ECodeWorld.Domain.Dtos.Posts
     {
         public int? PostTypesId { get; set; }
         public string Title { get; set; }
+        public string PostUrl { get; set; }
         public DateTime? ScheduleDate { get; set; }
         public string Description { get; set; }
         public int? AuthorId { get; set; }

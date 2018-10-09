@@ -45,6 +45,11 @@ namespace ECodeWorld.Web.API.Controllers.Posts
             return await this.tempPostsService.GetTempPost(postId);
         }
 
+        [HttpGet("UserPostsLightWeight")]
+        public async Task<IEnumerable<TempPostsDto>> UserPostsLightWeight([FromQuery]SearchCriteriaDto searchCriteriaDto, int userId)
+        {
+            return await this.tempPostsService.GetTempPostssLightWeight(searchCriteriaDto, userId);
+        }
         [HttpGet("UserPosts")]
         public async Task<IEnumerable<TempPostsDto>> GetUserPosts([FromQuery]SearchCriteriaDto searchCriteriaDto, int userId)
         {

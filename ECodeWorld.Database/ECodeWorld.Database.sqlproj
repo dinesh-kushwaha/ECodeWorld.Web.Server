@@ -116,6 +116,9 @@
     <Build Include="dbo\Tables\Posts\PostReviews.sql" />
     <Build Include="dbo\Tables\Posts\PostReviews_ML.sql" />
     <Build Include="dbo\Tables\Posts\Comments_ML.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.TempPosts.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.UserProfiles.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.ComplexityLevels.Table.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ECodeWorld.Database.refactorlog" />

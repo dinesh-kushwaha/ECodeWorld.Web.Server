@@ -8,6 +8,7 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.Posts
     {
         Task<M.Posts> GetPost(int postId);
         Task<IEnumerable<M.Posts>> GetUserPosts(SearchCriteria searchCriteria, int userId);
+
         Task<IEnumerable<M.Posts>> GetPosts(SearchCriteria searchCriteria);
         Task<int> CreatePost(M.Posts posts);
         Task<int> UpdatePost(int postId, M.Posts posts);
@@ -24,5 +25,6 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.Posts
 
         Task<M.TempPosts> GetTempPost(int postId);
         Task<IEnumerable<M.TempPosts>> GetTempPosts(SearchCriteria searchCriteria,int userId);
+        Task<IEnumerable<M.TempPosts>> UserPostsLightWeight(SearchCriteria searchCriteria, int userId);
     }
 }

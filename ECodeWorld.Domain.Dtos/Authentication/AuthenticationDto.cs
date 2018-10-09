@@ -1,13 +1,10 @@
-﻿using ECodeWorld.Domain.Dtos.Core;
-using ECodeWorld.Domain.Dtos.Message;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ECodeWorld.Domain.Dtos.Message;
 
 namespace ECodeWorld.Domain.Dtos.Authentication
 {
     public class AuthenticationDto : ResponseDto
     {
+        public string Name { get; set; }
         public bool IsAuthenticated { get; set; }
     }
 }

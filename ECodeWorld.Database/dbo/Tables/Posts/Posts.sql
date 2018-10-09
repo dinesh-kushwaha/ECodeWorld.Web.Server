@@ -3,6 +3,7 @@
 	[ID] INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_Posts PRIMARY KEY, 
 	[PostTypesID] [int] CONSTRAINT FK_PostsPostTypes FOREIGN KEY REFERENCES PostTypes(ID),
 	[Title] [varchar](255) NULL,
+	[PostUrl] [varchar](255) NULL,
 	[ScheduleDate] [date] NULL,
 	[Description] [varchar](500) NULL,
 	[AuthorID] [int] CONSTRAINT FK_PostsUsers FOREIGN KEY REFERENCES Users(ID),

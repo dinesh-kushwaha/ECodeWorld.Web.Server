@@ -10,8 +10,13 @@ Post-Deployment Script Template
 --------------------------------------------------------------------------------------
 */
  :r .\DataLoad\dbo.Users.Table.sql		
- :r .\DataLoad\dbo.Logins.Table.sql			
+ :r .\DataLoad\dbo.Logins.Table.sql		
+ :r .\DataLoad\dbo.UserProfiles.Table.sql		
+
 --Masters Tables
  :r .\DataLoad\dbo.PostCategories.Table.sql		
  :r .\DataLoad\dbo.PostStatus.Table.sql		
  :r .\DataLoad\dbo.PostTypes.Table.sql		
+  :r .\DataLoad\dbo.ComplexityLevels.Table.sql	
+
+  :r .\DataLoad\dbo.TempPosts.Table.sql		
