@@ -8,5 +8,6 @@
 	[ValidFrom] Date,
 	[ValidTo] Date,
 	[Order] INT,
-	[Date] [Date] NOT NULL DEFAULT GETDATE()
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

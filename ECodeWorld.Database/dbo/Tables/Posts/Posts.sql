@@ -14,7 +14,8 @@
 	[Status] [int] NOT NULL DEFAULT 0,
 	[LikeCounts] [int] NOT NULL DEFAULT 0,
 	[CommentCounts] [int] NOT NULL DEFAULT 0,
-	[Date] [date] NOT NULL DEFAULT GETDATE(),
 	[PostStatusID] [int] CONSTRAINT FK_PostsPostStatus FOREIGN KEY REFERENCES PostStatus(ID),
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 
 )

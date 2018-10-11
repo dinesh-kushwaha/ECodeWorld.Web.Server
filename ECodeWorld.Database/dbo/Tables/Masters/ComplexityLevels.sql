@@ -4,5 +4,6 @@
 	[Complexity] varchar(255) NOT NULL CONSTRAINT UC_ComplexityLevels UNIQUE (Complexity),
 	[Description] varchar(500) NULL,
 	[Status] [int] NOT NULL DEFAULT 0,
-	[Date] [Date] NOT NULL DEFAULT GETDATE()
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

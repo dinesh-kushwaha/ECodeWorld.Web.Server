@@ -9,5 +9,6 @@
     [AuthorEmail] VARCHAR (255) NULL,
 	[AuthorsID] [int] CONSTRAINT FK_CommentsAuthors FOREIGN KEY REFERENCES Users(ID),
 	[PostsID] [int] CONSTRAINT FK_CommentsPosts FOREIGN KEY REFERENCES Posts(ID),
-	[Date] [Date] NOT NULL DEFAULT GETDATE()
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[Groups]
+(
+	[ID] INT IDENTITY(1,1) NOT NULL  CONSTRAINT PK_Groups PRIMARY KEY, 
+    [Name] VARCHAR(50) NOT NULL,
+	[Description] VARCHAR(50) NULL,
+	[Status] [int] NOT NULL DEFAULT 0,
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
+)

@@ -4,5 +4,6 @@
     [Type]      VARCHAR (10)  NULL,
     [LikeIP]        VARCHAR (100) NULL,
 	[PostsID] [int] CONSTRAINT FK_LikesCountersPosts FOREIGN KEY REFERENCES Posts(ID),
-	[Date] [Date] NOT NULL DEFAULT GETDATE()
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

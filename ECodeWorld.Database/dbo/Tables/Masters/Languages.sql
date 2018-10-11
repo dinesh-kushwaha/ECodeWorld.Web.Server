@@ -5,5 +5,6 @@
 	[Code] [varchar](12) NOT NULL,
 	[NameLocal] [nvarchar](128) NULL,
 	[Status] [int] NOT NULL,
-	[Date] [Date] NOT NULL DEFAULT GETDATE()
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

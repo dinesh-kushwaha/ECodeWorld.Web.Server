@@ -6,5 +6,6 @@
     [Content]     VARCHAR (100) NULL,
 	[Status] [int] NOT NULL DEFAULT 0,
 	CONSTRAINT UC_CommentsLanguage UNIQUE (CommentsID,LanguageID),
-	[Date] [Date] NOT NULL DEFAULT GETDATE()
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

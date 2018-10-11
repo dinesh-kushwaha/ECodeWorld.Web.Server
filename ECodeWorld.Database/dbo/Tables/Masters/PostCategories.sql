@@ -4,5 +4,6 @@
 	[Category] [varchar](255) NOT NULL CONSTRAINT UC_PostCategories UNIQUE (Category),
 	[Description] [varchar](255) NULL,
 	[Status] [int] NOT NULL DEFAULT 0,
-	[Date] [Date] NOT NULL DEFAULT GETDATE()
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

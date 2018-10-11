@@ -1,6 +1,0 @@
-﻿CREATE TABLE [dbo].[AccessLevels]
-(
-	[ID] INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_AccessLevels PRIMARY KEY, 
-    [AccessLevel] VARCHAR(50) NULL,
-	[Date] [Date] NOT NULL DEFAULT GETDATE()
-)

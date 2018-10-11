@@ -6,5 +6,7 @@
 	[PType] VARCHAR (255) NOT NULL CONSTRAINT UC_PostTypes_ML UNIQUE (PType),
 	[Description]     VARCHAR (255) NULL,
 	[Status] [int] NOT NULL DEFAULT 0,
-	CONSTRAINT UC_UniquePostTypesLanguage UNIQUE (PostTypesID,LanguageID)
+	CONSTRAINT UC_UniquePostTypesLanguage UNIQUE (PostTypesID,LanguageID),
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

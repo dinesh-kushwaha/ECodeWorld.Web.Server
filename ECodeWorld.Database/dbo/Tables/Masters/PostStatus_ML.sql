@@ -6,5 +6,7 @@
 	[PStatus] [varchar](255) NOT NULL CONSTRAINT UC_PostStatus_ML UNIQUE (PStatus),
 	[Description]     VARCHAR (255) NULL,
 	[Status] [int] NOT NULL DEFAULT 0,
-	CONSTRAINT UC_UniquePostStatusLanguage UNIQUE (PostStatusID,LanguageID)
+	CONSTRAINT UC_UniquePostStatusLanguage UNIQUE (PostStatusID,LanguageID),
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

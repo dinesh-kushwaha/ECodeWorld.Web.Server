@@ -6,5 +6,7 @@
 	[Name] [char](25) NULL,
 	[Code] [varchar](50) NULL,
 	[ISOCode] [varchar](50) NULL,
-	CONSTRAINT UC_UniqueCountriesLanguage UNIQUE (CountriesID,LanguageID)
+	CONSTRAINT UC_UniqueCountriesLanguage UNIQUE (CountriesID,LanguageID),
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

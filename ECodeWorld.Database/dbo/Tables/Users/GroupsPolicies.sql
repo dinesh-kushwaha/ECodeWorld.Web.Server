@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[GroupsPolicies]
+(
+	[ID] INT IDENTITY(1,1) NOT NULL  CONSTRAINT PK_GroupsPolicies PRIMARY KEY, 
+	[GroupsID] INT CONSTRAINT FK_GroupsPoliciesGroups FOREIGN KEY REFERENCES Groups(ID), 
+	[PoliciesID] INT CONSTRAINT FK_GroupsPoliciesPolicies FOREIGN KEY REFERENCES Policies(ID),
+	[Status] [int] NOT NULL DEFAULT 0,
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
+)

@@ -6,5 +6,7 @@
 	[Category] [varchar](255) NOT NULL CONSTRAINT UC_PostCategories_ML UNIQUE (Category),
 	[Description] [varchar](255) NULL,
 	[Status] [int] NOT NULL DEFAULT 0,
-	CONSTRAINT UC_UniquePostCategoryLanguage UNIQUE (PostCategoriesID,LanguageID)
+	CONSTRAINT UC_UniquePostCategoryLanguage UNIQUE (PostCategoriesID,LanguageID),
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

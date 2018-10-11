@@ -8,5 +8,7 @@
 	[Keywords] [varchar](500) NULL,
 	[Contents] [nvarchar](max) NULL,
 	[Status] [int] NOT NULL DEFAULT 0,
-	CONSTRAINT UC_UniqueTempPosts_MLLanguage UNIQUE (TempPostsID,LanguageID)
+	CONSTRAINT UC_UniqueTempPosts_MLLanguage UNIQUE (TempPostsID,LanguageID),
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

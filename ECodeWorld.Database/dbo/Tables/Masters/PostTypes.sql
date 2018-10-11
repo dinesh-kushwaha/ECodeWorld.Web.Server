@@ -4,5 +4,6 @@
 	[PType] VARCHAR (255) NOT NULL CONSTRAINT UC_PostTypes UNIQUE (PType),
 	[Description]     VARCHAR (255) NULL,
 	[Status] [int] NOT NULL DEFAULT 0,
-	[Date] [Date] NOT NULL DEFAULT GETDATE(),
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

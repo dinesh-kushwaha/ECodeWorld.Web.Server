@@ -4,6 +4,7 @@
 	[Name] VARCHAR(50) NULL,
 	[Code] VARCHAR(50) NULL,
 	[ISOCode] VARCHAR(50) NULL,
-	[Date] [Date] NOT NULL DEFAULT GETDATE(),
-	[CountriesID] [int] CONSTRAINT FK_StatesCountries FOREIGN KEY REFERENCES Countries(ID)
+	[CountriesID] [int] CONSTRAINT FK_StatesCountries FOREIGN KEY REFERENCES Countries(ID),
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

@@ -5,5 +5,6 @@
 	[PasswordSalt] VARCHAR(500) NULL,
 	[PasswordHash] VARCHAR(500) NULL,
 	[UsersID] [int] CONSTRAINT FK_LoginsUsers FOREIGN KEY REFERENCES Users(ID),
-	[Date] [Date] NOT NULL DEFAULT GETDATE()
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )

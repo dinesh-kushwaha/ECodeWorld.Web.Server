@@ -6,5 +6,7 @@
 	[Name] VARCHAR(50) NULL,
 	[Code] VARCHAR(50) NULL,
 	[ISOCode] VARCHAR(50) NULL,
-	CONSTRAINT UC_UniqueCitiesLanguage UNIQUE (CitiesID,LanguageID)
+	CONSTRAINT UC_UniqueCitiesLanguage UNIQUE (CitiesID,LanguageID),
+	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
+	[Timestamp] ROWVERSION  NOT NULL,
 )
