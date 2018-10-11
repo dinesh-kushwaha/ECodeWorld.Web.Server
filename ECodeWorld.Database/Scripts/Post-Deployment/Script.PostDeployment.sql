@@ -17,6 +17,12 @@ Post-Deployment Script Template
  :r .\DataLoad\dbo.PostCategories.Table.sql		
  :r .\DataLoad\dbo.PostStatus.Table.sql		
  :r .\DataLoad\dbo.PostTypes.Table.sql		
-  :r .\DataLoad\dbo.ComplexityLevels.Table.sql	
+ :r .\DataLoad\dbo.ComplexityLevels.Table.sql	
 
-  :r .\DataLoad\dbo.TempPosts.Table.sql		
+ :r .\DataLoad\dbo.TempPosts.Table.sql		
+
+ :r .\DataLoad\dbo.ECWResources.Table.sql		
+ :r .\DataLoad\dbo.Roles.Table.sql		
+ :r .\DataLoad\dbo.Permissions.Table.sql		
+ :r .\DataLoad\dbo.RolesPermissions.Table.sql	
+ 

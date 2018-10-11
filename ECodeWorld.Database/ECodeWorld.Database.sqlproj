@@ -122,6 +122,15 @@
     <Build Include="dbo\Tables\Users\UsersPolicies.sql" />
     <Build Include="dbo\Tables\Users\GroupsPolicies.sql" />
     <Build Include="dbo\Tables\Users\RolesPermissions.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.ECWResources.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.Groups.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.GroupsPolicies.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.Permissions.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.Policies.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.Roles.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.RolesPermissions.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.UserGroups.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.UsersPolicies.Table.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ECodeWorld.Database.refactorlog" />
