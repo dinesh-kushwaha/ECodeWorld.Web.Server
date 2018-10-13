@@ -77,11 +77,11 @@
     <Build Include="dbo\Tables\Posts\Posts.sql" />
     <Build Include="dbo\Tables\Users\Logins.sql" />
     <Build Include="dbo\Tables\Users\Qualifications.sql" />
-    <Build Include="dbo\Tables\Users\UserQualifications.sql" />
+    <Build Include="dbo\Tables\Users\UsersQualifications.sql" />
     <Build Include="dbo\Tables\Users\Universities.sql" />
     <Build Include="dbo\Tables\Users\Certifications.sql" />
-    <Build Include="dbo\Tables\Users\UserCertifications.sql" />
-    <Build Include="dbo\Tables\Users\UserProfiles.sql" />
+    <Build Include="dbo\Tables\Users\UsersCertifications.sql" />
+    <Build Include="dbo\Tables\Users\UsersProfiles.sql" />
     <Build Include="dbo\Tables\Users\UsersAddress.sql" />
     <Build Include="dbo\Tables\Masters\Countries.sql" />
     <Build Include="dbo\Tables\Masters\States.sql" />
@@ -114,7 +114,7 @@
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.TempPosts.Table.sql" />
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.UserProfiles.Table.sql" />
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.ComplexityLevels.Table.sql" />
-    <Build Include="dbo\Tables\Users\UserGroups.sql" />
+    <Build Include="dbo\Tables\Users\UsersGroups.sql" />
     <Build Include="dbo\Tables\Users\Policies.sql" />
     <Build Include="dbo\Tables\Users\Groups.sql" />
     <Build Include="dbo\Tables\Users\Permissions.sql" />
@@ -131,6 +131,8 @@
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.RolesPermissions.Table.sql" />
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.UserGroups.Table.sql" />
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.UsersPolicies.Table.sql" />
+    <Build Include="dbo\Tables\Users\GroupsRoles.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.GroupsRoles.Table.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ECodeWorld.Database.refactorlog" />

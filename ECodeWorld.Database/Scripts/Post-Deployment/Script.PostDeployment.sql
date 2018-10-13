@@ -13,6 +13,14 @@ Post-Deployment Script Template
  :r .\DataLoad\dbo.Logins.Table.sql		
  :r .\DataLoad\dbo.UserProfiles.Table.sql		
 
+ :r .\DataLoad\dbo.ECWResources.Table.sql	
+ :r .\DataLoad\dbo.Groups.Table.sql
+ :r .\DataLoad\dbo.Roles.Table.sql		
+ :r .\DataLoad\dbo.Permissions.Table.sql
+ :r .\DataLoad\dbo.UserGroups.Table.sql		
+ :r .\DataLoad\dbo.GroupsRoles.Table.sql	
+ :r .\DataLoad\dbo.RolesPermissions.Table.sql	
+
 --Masters Tables
  :r .\DataLoad\dbo.PostCategories.Table.sql		
  :r .\DataLoad\dbo.PostStatus.Table.sql		
@@ -21,8 +29,5 @@ Post-Deployment Script Template
 
  :r .\DataLoad\dbo.TempPosts.Table.sql		
 
- :r .\DataLoad\dbo.ECWResources.Table.sql		
- :r .\DataLoad\dbo.Roles.Table.sql		
- :r .\DataLoad\dbo.Permissions.Table.sql		
- :r .\DataLoad\dbo.RolesPermissions.Table.sql	
+ 
  

@@ -2,7 +2,7 @@
 (
 	[ID] INT IDENTITY(1,1) NOT NULL  CONSTRAINT PK_Policies PRIMARY KEY, 
     [Name] VARCHAR(50) NOT NULL,
-	[Description] VARCHAR(50) NULL,
+	[Description] VARCHAR(150) NULL,
 	[ECWResourcesID] INT CONSTRAINT FK_PoliciesECWResources FOREIGN KEY REFERENCES ECWResources(ID), 
 	[PermissionsID] INT CONSTRAINT FK_PoliciesPermissions FOREIGN KEY REFERENCES [Permissions](ID),
 	[Status] [int] NOT NULL DEFAULT 0,
