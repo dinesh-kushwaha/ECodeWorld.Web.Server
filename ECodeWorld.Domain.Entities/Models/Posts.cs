@@ -27,8 +27,9 @@ namespace ECodeWorld.Domain.Entities.Models
         public int Status { get; set; }
         public int LikeCounts { get; set; }
         public int CommentCounts { get; set; }
-        public DateTime Date { get; set; }
         public int? PostStatusId { get; set; }
+        public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Users Author { get; set; }
         public PostCategories Category { get; set; }

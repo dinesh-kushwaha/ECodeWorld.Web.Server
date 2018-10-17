@@ -15,6 +15,7 @@ namespace ECodeWorld.Domain.Entities.Models
         public int? PostalCode { get; set; }
         public int? UsersId { get; set; }
         public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Users Users { get; set; }
     }

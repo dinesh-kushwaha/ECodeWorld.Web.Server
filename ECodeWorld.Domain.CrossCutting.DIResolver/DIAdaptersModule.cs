@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using ECodeWorld.Domain.CrossCutting.Adapters.Accounts;
 using ECodeWorld.Domain.CrossCutting.Adapters.Masters;
 using ECodeWorld.Domain.CrossCutting.Adapters.Posts;
 using U = ECodeWorld.Domain.CrossCutting.Adapters.Usres;
@@ -9,6 +10,7 @@ namespace ECodeWorld.Domain.CrossCutting.DIResolver
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<AccountsMapper>().As<IAccountsMapper>();
             builder.RegisterType<PostsMapper>().As<IPostsMapper>();
             builder.RegisterType<TempPostsMapper>().As<ITempPostsMapper>();
             builder.RegisterType<U.AuthMapper>().As<U.IAuthMapper>();

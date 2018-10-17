@@ -11,6 +11,7 @@ namespace ECodeWorld.Domain.Entities.Models
         public string PasswordHash { get; set; }
         public int? UsersId { get; set; }
         public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Users Users { get; set; }
     }

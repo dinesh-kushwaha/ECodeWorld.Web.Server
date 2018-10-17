@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ECodeWorld.Domain.Entities.Models
 {
-    public partial class PostReviewsMl
+    public partial class PostReviewersMl
     {
         public int Id { get; set; }
         public int PostReviewsId { get; set; }
@@ -12,8 +12,9 @@ namespace ECodeWorld.Domain.Entities.Models
         public string Messages { get; set; }
         public int Status { get; set; }
         public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Languages Language { get; set; }
-        public PostReviews PostReviews { get; set; }
+        public PostReviewers PostReviews { get; set; }
     }
 }

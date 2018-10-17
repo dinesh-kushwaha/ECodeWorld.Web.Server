@@ -18,6 +18,7 @@ namespace ECodeWorld.Domain.Entities.Models
         public string Description { get; set; }
         public int Status { get; set; }
         public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public ICollection<PostStatusMl> PostStatusMl { get; set; }
         public ICollection<PostTypesMl> PostTypesMl { get; set; }

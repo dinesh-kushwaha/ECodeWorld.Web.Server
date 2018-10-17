@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace ECodeWorld.Domain.Entities.Models
 {
-    public partial class PostReviews
+    public partial class PostReviewers
     {
-        public PostReviews()
+        public PostReviewers()
         {
-            PostReviewsMl = new HashSet<PostReviewsMl>();
+            PostReviewersMl = new HashSet<PostReviewersMl>();
         }
 
         public int Id { get; set; }
@@ -22,9 +22,10 @@ namespace ECodeWorld.Domain.Entities.Models
         public DateTime? DoneDate { get; set; }
         public int Status { get; set; }
         public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public TempPosts TempPosts { get; set; }
         public Users Users { get; set; }
-        public ICollection<PostReviewsMl> PostReviewsMl { get; set; }
+        public ICollection<PostReviewersMl> PostReviewersMl { get; set; }
     }
 }

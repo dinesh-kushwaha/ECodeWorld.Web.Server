@@ -11,6 +11,8 @@ namespace ECodeWorld.Domain.Entities.Models
         public string Category { get; set; }
         public string Description { get; set; }
         public int Status { get; set; }
+        public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Languages Language { get; set; }
         public PostCategories PostCategories { get; set; }

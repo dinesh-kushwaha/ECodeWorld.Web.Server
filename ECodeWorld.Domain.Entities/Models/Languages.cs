@@ -12,7 +12,7 @@ namespace ECodeWorld.Domain.Entities.Models
             ComplexityLevelsMl = new HashSet<ComplexityLevelsMl>();
             CountriesMl = new HashSet<CountriesMl>();
             PostCategoriesMl = new HashSet<PostCategoriesMl>();
-            PostReviewsMl = new HashSet<PostReviewsMl>();
+            PostReviewersMl = new HashSet<PostReviewersMl>();
             PostStatusMl = new HashSet<PostStatusMl>();
             PostTypesMl = new HashSet<PostTypesMl>();
             PostsMl = new HashSet<PostsMl>();
@@ -26,13 +26,14 @@ namespace ECodeWorld.Domain.Entities.Models
         public string NameLocal { get; set; }
         public int Status { get; set; }
         public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public ICollection<CitiesMl> CitiesMl { get; set; }
         public ICollection<CommentsMl> CommentsMl { get; set; }
         public ICollection<ComplexityLevelsMl> ComplexityLevelsMl { get; set; }
         public ICollection<CountriesMl> CountriesMl { get; set; }
         public ICollection<PostCategoriesMl> PostCategoriesMl { get; set; }
-        public ICollection<PostReviewsMl> PostReviewsMl { get; set; }
+        public ICollection<PostReviewersMl> PostReviewersMl { get; set; }
         public ICollection<PostStatusMl> PostStatusMl { get; set; }
         public ICollection<PostTypesMl> PostTypesMl { get; set; }
         public ICollection<PostsMl> PostsMl { get; set; }

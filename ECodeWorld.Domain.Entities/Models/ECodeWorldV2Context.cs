@@ -17,32 +17,34 @@ namespace ECodeWorld.Domain.Entities.Models
             this.connectionString = connectionString;
             this.cacheTimespan = cacheTimespan;
         }
+
         public ECodeWorldContext(DbContextOptions<ECodeWorldContext> options)
             : base(options)
         {
         }
 
-        public virtual DbSet<AccessLevels> AccessLevels { get; set; }
-        public virtual DbSet<AccountPlanLevels> AccountPlanLevels { get; set; }
-        public virtual DbSet<Accounts> Accounts { get; set; }
         public virtual DbSet<Certifications> Certifications { get; set; }
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<CitiesMl> CitiesMl { get; set; }
         public virtual DbSet<Comments> Comments { get; set; }
         public virtual DbSet<CommentsMl> CommentsMl { get; set; }
-        public virtual DbSet<Companies> Companies { get; set; }
         public virtual DbSet<ComplexityLevels> ComplexityLevels { get; set; }
         public virtual DbSet<ComplexityLevelsMl> ComplexityLevelsMl { get; set; }
         public virtual DbSet<Countries> Countries { get; set; }
         public virtual DbSet<CountriesMl> CountriesMl { get; set; }
+        public virtual DbSet<Ecwresources> Ecwresources { get; set; }
+        public virtual DbSet<Groups> Groups { get; set; }
+        public virtual DbSet<GroupsPolicies> GroupsPolicies { get; set; }
+        public virtual DbSet<GroupsRoles> GroupsRoles { get; set; }
         public virtual DbSet<Languages> Languages { get; set; }
         public virtual DbSet<LikesCounters> LikesCounters { get; set; }
         public virtual DbSet<Logins> Logins { get; set; }
-        public virtual DbSet<Memberships> Memberships { get; set; }
+        public virtual DbSet<Permissions> Permissions { get; set; }
+        public virtual DbSet<Policies> Policies { get; set; }
         public virtual DbSet<PostCategories> PostCategories { get; set; }
         public virtual DbSet<PostCategoriesMl> PostCategoriesMl { get; set; }
-        public virtual DbSet<PostReviews> PostReviews { get; set; }
-        public virtual DbSet<PostReviewsMl> PostReviewsMl { get; set; }
+        public virtual DbSet<PostReviewers> PostReviewers { get; set; }
+        public virtual DbSet<PostReviewersMl> PostReviewersMl { get; set; }
         public virtual DbSet<Posts> Posts { get; set; }
         public virtual DbSet<PostsImages> PostsImages { get; set; }
         public virtual DbSet<PostsMl> PostsMl { get; set; }
@@ -52,16 +54,19 @@ namespace ECodeWorld.Domain.Entities.Models
         public virtual DbSet<PostTypesMl> PostTypesMl { get; set; }
         public virtual DbSet<Qualifications> Qualifications { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
+        public virtual DbSet<RolesPermissions> RolesPermissions { get; set; }
         public virtual DbSet<States> States { get; set; }
         public virtual DbSet<StatesMl> StatesMl { get; set; }
         public virtual DbSet<TempPosts> TempPosts { get; set; }
         public virtual DbSet<TempPostsMl> TempPostsMl { get; set; }
         public virtual DbSet<Universities> Universities { get; set; }
-        public virtual DbSet<UserCertifications> UserCertifications { get; set; }
-        public virtual DbSet<UserProfiles> UserProfiles { get; set; }
-        public virtual DbSet<UserQualifications> UserQualifications { get; set; }
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<UsersAddress> UsersAddress { get; set; }
+        public virtual DbSet<UsersCertifications> UsersCertifications { get; set; }
+        public virtual DbSet<UsersGroups> UsersGroups { get; set; }
+        public virtual DbSet<UsersPolicies> UsersPolicies { get; set; }
+        public virtual DbSet<UsersProfiles> UsersProfiles { get; set; }
+        public virtual DbSet<UsersQualifications> UsersQualifications { get; set; }
         public virtual DbSet<ZipCodes> ZipCodes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -69,64 +74,18 @@ namespace ECodeWorld.Domain.Entities.Models
             if (!optionsBuilder.IsConfigured)
             {
                 //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(connectionString);
+                optionsBuilder.UseSqlServer(this.connectionString);
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<AccessLevels>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.AccessLevel)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("date")
-                    .HasDefaultValueSql("(getdate())");
-            });
-
-            modelBuilder.Entity<AccountPlanLevels>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.AccountPlanLevel)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("date")
-                    .HasDefaultValueSql("(getdate())");
-            });
-
-            modelBuilder.Entity<Accounts>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.AccountPlanLevelsId).HasColumnName("AccountPlanLevelsID");
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("date")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.AccountPlanLevels)
-                    .WithMany(p => p.Accounts)
-                    .HasForeignKey(d => d.AccountPlanLevelsId)
-                    .HasConstraintName("FK_AccountsPlanLevels");
-            });
-
             modelBuilder.Entity<Certifications>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
@@ -136,6 +95,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
             });
 
             modelBuilder.Entity<Cities>(entity =>
@@ -147,7 +110,7 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Isocode)
@@ -160,6 +123,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.StatesId).HasColumnName("StatesID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.States)
                     .WithMany(p => p.Cities)
@@ -183,6 +150,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.Isocode)
                     .HasColumnName("ISOCode")
                     .HasMaxLength(50)
@@ -193,6 +164,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.Cities)
                     .WithMany(p => p.CitiesMl)
@@ -225,10 +200,14 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.PostsId).HasColumnName("PostsID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.Authors)
                     .WithMany(p => p.Comments)
@@ -258,10 +237,14 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.Comments)
                     .WithMany(p => p.CommentsMl)
@@ -273,33 +256,6 @@ namespace ECodeWorld.Domain.Entities.Models
                     .WithMany(p => p.CommentsMl)
                     .HasForeignKey(d => d.LanguageId)
                     .HasConstraintName("FK_Comments_MLLanguages");
-            });
-
-            modelBuilder.Entity<Companies>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.AccessLevelsId).HasColumnName("AccessLevelsID");
-
-                entity.Property(e => e.AccountsId).HasColumnName("AccountsID");
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("date")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Name)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.HasOne(d => d.AccessLevels)
-                    .WithMany(p => p.Companies)
-                    .HasForeignKey(d => d.AccessLevelsId)
-                    .HasConstraintName("FK_CompaniesAccessLevels");
-
-                entity.HasOne(d => d.Accounts)
-                    .WithMany(p => p.Companies)
-                    .HasForeignKey(d => d.AccountsId)
-                    .HasConstraintName("FK_CompaniesAccounts");
             });
 
             modelBuilder.Entity<ComplexityLevels>(entity =>
@@ -316,12 +272,16 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(500)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
             });
 
             modelBuilder.Entity<ComplexityLevelsMl>(entity =>
@@ -345,11 +305,19 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.ComplexityLevelsId).HasColumnName("ComplexityLevelsID");
 
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.Description)
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
                 entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.ComplexityLevels)
                     .WithMany(p => p.ComplexityLevelsMl)
@@ -371,7 +339,7 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Isocode)
@@ -382,6 +350,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(25)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
             });
 
             modelBuilder.Entity<CountriesMl>(entity =>
@@ -400,6 +372,10 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.CountriesId).HasColumnName("CountriesID");
 
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.Isocode)
                     .HasColumnName("ISOCode")
                     .HasMaxLength(50)
@@ -410,6 +386,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(25)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.Countries)
                     .WithMany(p => p.CountriesMl)
@@ -422,6 +402,111 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasConstraintName("FK_Countries_MLLanguages");
             });
 
+            modelBuilder.Entity<Ecwresources>(entity =>
+            {
+                entity.ToTable("ECWResources");
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Code)
+                    .IsRequired()
+                    .HasMaxLength(15)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+            });
+
+            modelBuilder.Entity<Groups>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+            });
+
+            modelBuilder.Entity<GroupsPolicies>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.GroupsId).HasColumnName("GroupsID");
+
+                entity.Property(e => e.PoliciesId).HasColumnName("PoliciesID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.HasOne(d => d.Groups)
+                    .WithMany(p => p.GroupsPolicies)
+                    .HasForeignKey(d => d.GroupsId)
+                    .HasConstraintName("FK_GroupsPoliciesGroups");
+
+                entity.HasOne(d => d.Policies)
+                    .WithMany(p => p.GroupsPolicies)
+                    .HasForeignKey(d => d.PoliciesId)
+                    .HasConstraintName("FK_GroupsPoliciesPolicies");
+            });
+
+            modelBuilder.Entity<GroupsRoles>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.GroupsId).HasColumnName("GroupsID");
+
+                entity.Property(e => e.RolesId).HasColumnName("RolesID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.HasOne(d => d.Groups)
+                    .WithMany(p => p.GroupsRoles)
+                    .HasForeignKey(d => d.GroupsId)
+                    .HasConstraintName("FK_GroupsRolesGroups");
+
+                entity.HasOne(d => d.Roles)
+                    .WithMany(p => p.GroupsRoles)
+                    .HasForeignKey(d => d.RolesId)
+                    .HasConstraintName("FK_GroupsRolesRoles");
+            });
+
             modelBuilder.Entity<Languages>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -432,7 +517,7 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Name)
@@ -441,6 +526,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.NameLocal).HasMaxLength(128);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
             });
 
             modelBuilder.Entity<LikesCounters>(entity =>
@@ -448,7 +537,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.LikeIp)
@@ -457,6 +546,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.PostsId).HasColumnName("PostsID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.Property(e => e.Type)
                     .HasMaxLength(10)
@@ -473,7 +566,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.PasswordHash)
@@ -483,6 +576,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.PasswordSalt)
                     .HasMaxLength(500)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.Property(e => e.UserName)
                     .HasMaxLength(500)
@@ -496,46 +593,72 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasConstraintName("FK_LoginsUsers");
             });
 
-            modelBuilder.Entity<Memberships>(entity =>
+            modelBuilder.Entity<Permissions>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.Property(e => e.CompaniesId).HasColumnName("CompaniesID");
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("date")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Email)
+                entity.Property(e => e.Action)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Fax)
-                    .HasMaxLength(15)
+                entity.Property(e => e.ActionCode)
+                    .IsRequired()
+                    .HasMaxLength(5)
                     .IsUnicode(false);
 
-                entity.Property(e => e.Phone)
-                    .HasMaxLength(15)
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
-                entity.Property(e => e.RolesId).HasColumnName("RolesID");
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
-                entity.Property(e => e.UsersId).HasColumnName("UsersID");
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+            });
 
-                entity.HasOne(d => d.Companies)
-                    .WithMany(p => p.Memberships)
-                    .HasForeignKey(d => d.CompaniesId)
-                    .HasConstraintName("FK_MembershipsCompanies");
+            modelBuilder.Entity<Policies>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
 
-                entity.HasOne(d => d.Roles)
-                    .WithMany(p => p.Memberships)
-                    .HasForeignKey(d => d.RolesId)
-                    .HasConstraintName("FK_MembershipsRoles");
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
 
-                entity.HasOne(d => d.Users)
-                    .WithMany(p => p.Memberships)
-                    .HasForeignKey(d => d.UsersId)
-                    .HasConstraintName("FK_MembershipsUsers");
+                entity.Property(e => e.Description)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.EcwresourcesId).HasColumnName("ECWResourcesID");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PermissionsId).HasColumnName("PermissionsID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.HasOne(d => d.Ecwresources)
+                    .WithMany(p => p.Policies)
+                    .HasForeignKey(d => d.EcwresourcesId)
+                    .HasConstraintName("FK_PoliciesECWResources");
+
+                entity.HasOne(d => d.Permissions)
+                    .WithMany(p => p.Policies)
+                    .HasForeignKey(d => d.PermissionsId)
+                    .HasConstraintName("FK_PoliciesPermissions");
             });
 
             modelBuilder.Entity<PostCategories>(entity =>
@@ -552,12 +675,16 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
             });
 
             modelBuilder.Entity<PostCategoriesMl>(entity =>
@@ -579,6 +706,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.Description)
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -586,6 +717,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.PostCategoriesId).HasColumnName("PostCategoriesID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.Language)
                     .WithMany(p => p.PostCategoriesMl)
@@ -598,7 +733,7 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasConstraintName("FK_TempPosts_MLPostCategories");
             });
 
-            modelBuilder.Entity<PostReviews>(entity =>
+            modelBuilder.Entity<PostReviewers>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
@@ -613,7 +748,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.CompletionDate).HasColumnType("date");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.DoneDate).HasColumnType("date");
@@ -624,24 +759,28 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.TempPostsId).HasColumnName("TempPostsID");
 
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
                 entity.Property(e => e.UsersId).HasColumnName("UsersID");
 
                 entity.HasOne(d => d.TempPosts)
-                    .WithMany(p => p.PostReviews)
+                    .WithMany(p => p.PostReviewers)
                     .HasForeignKey(d => d.TempPostsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PostReviewTempPosts");
+                    .HasConstraintName("FK_PostReviewersTempPosts");
 
                 entity.HasOne(d => d.Users)
-                    .WithMany(p => p.PostReviews)
+                    .WithMany(p => p.PostReviewers)
                     .HasForeignKey(d => d.UsersId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PostReviewUsers");
+                    .HasConstraintName("FK_PostReviewersUsers");
             });
 
-            modelBuilder.Entity<PostReviewsMl>(entity =>
+            modelBuilder.Entity<PostReviewersMl>(entity =>
             {
-                entity.ToTable("PostReviews_ML");
+                entity.ToTable("PostReviewers_ML");
 
                 entity.HasIndex(e => new { e.PostReviewsId, e.LanguageId })
                     .HasName("UC_PostReviews_MLLanguage")
@@ -654,7 +793,7 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
@@ -665,13 +804,17 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.PostReviewsId).HasColumnName("PostReviewsID");
 
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
                 entity.HasOne(d => d.Language)
-                    .WithMany(p => p.PostReviewsMl)
+                    .WithMany(p => p.PostReviewersMl)
                     .HasForeignKey(d => d.LanguageId)
                     .HasConstraintName("FK_PostReviews_MLLanguages");
 
                 entity.HasOne(d => d.PostReviews)
-                    .WithMany(p => p.PostReviewsMl)
+                    .WithMany(p => p.PostReviewersMl)
                     .HasForeignKey(d => d.PostReviewsId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PostReviews_MLPostReviews");
@@ -688,7 +831,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.ComplexityLevelsId).HasColumnName("ComplexityLevelsID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
@@ -703,7 +846,15 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.PostTypesId).HasColumnName("PostTypesID");
 
+                entity.Property(e => e.PostUrl)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ScheduleDate).HasColumnType("date");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.Property(e => e.Title)
                     .HasMaxLength(255)
@@ -740,10 +891,14 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.PostId).HasColumnName("PostID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.Property(e => e.Url)
                     .HasColumnName("URL")
@@ -764,7 +919,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
@@ -778,6 +933,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.PostsId).HasColumnName("PostsID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.Property(e => e.Title)
                     .HasMaxLength(255)
@@ -803,7 +962,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
@@ -815,6 +974,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasColumnName("PStatus")
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
             });
 
             modelBuilder.Entity<PostStatusMl>(entity =>
@@ -831,6 +994,10 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.Description)
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -844,6 +1011,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasColumnName("PStatus")
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.Language)
                     .WithMany(p => p.PostStatusMl)
@@ -865,7 +1036,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
@@ -877,6 +1048,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasColumnName("PType")
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
             });
 
             modelBuilder.Entity<PostTypesMl>(entity =>
@@ -893,6 +1068,10 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.Description)
                     .HasMaxLength(255)
                     .IsUnicode(false);
@@ -906,6 +1085,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasColumnName("PType")
                     .HasMaxLength(255)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.Language)
                     .WithMany(p => p.PostTypesMl)
@@ -923,7 +1106,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
@@ -933,6 +1116,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
             });
 
             modelBuilder.Entity<Roles>(entity =>
@@ -940,12 +1127,59 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
-                entity.Property(e => e.Role)
+                entity.Property(e => e.Description)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+            });
+
+            modelBuilder.Entity<RolesPermissions>(entity =>
+            {
+                entity.HasIndex(e => new { e.RolesId, e.EcwresourcesId, e.PermissionsId })
+                    .HasName("UniqueRolesPermissionsResources")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.EcwresourcesId).HasColumnName("ECWResourcesID");
+
+                entity.Property(e => e.PermissionsId).HasColumnName("PermissionsID");
+
+                entity.Property(e => e.RolesId).HasColumnName("RolesID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.HasOne(d => d.Ecwresources)
+                    .WithMany(p => p.RolesPermissions)
+                    .HasForeignKey(d => d.EcwresourcesId)
+                    .HasConstraintName("FK_RolesPermissionsECWResources");
+
+                entity.HasOne(d => d.Permissions)
+                    .WithMany(p => p.RolesPermissions)
+                    .HasForeignKey(d => d.PermissionsId)
+                    .HasConstraintName("FK_RolesPermissionsPermissions");
+
+                entity.HasOne(d => d.Roles)
+                    .WithMany(p => p.RolesPermissions)
+                    .HasForeignKey(d => d.RolesId)
+                    .HasConstraintName("FK_RolesPermissionsRoles");
             });
 
             modelBuilder.Entity<States>(entity =>
@@ -959,7 +1193,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.CountriesId).HasColumnName("CountriesID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Isocode)
@@ -970,6 +1204,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.Countries)
                     .WithMany(p => p.States)
@@ -991,6 +1229,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.Isocode)
                     .HasColumnName("ISOCode")
                     .HasMaxLength(50)
@@ -1003,6 +1245,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.StatesId).HasColumnName("StatesID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.Language)
                     .WithMany(p => p.StatesMl)
@@ -1026,7 +1272,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.ComplexityLevelsId).HasColumnName("ComplexityLevelsID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
@@ -1041,7 +1287,15 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.PostTypesId).HasColumnName("PostTypesID");
 
+                entity.Property(e => e.PostUrl)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.ScheduleDate).HasColumnType("date");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.Property(e => e.Title)
                     .HasMaxLength(255)
@@ -1083,6 +1337,10 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.Id).HasColumnName("ID");
 
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.Description)
                     .HasMaxLength(500)
                     .IsUnicode(false);
@@ -1094,6 +1352,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
                 entity.Property(e => e.TempPostsId).HasColumnName("TempPostsID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.Property(e => e.Title)
                     .HasMaxLength(255)
@@ -1115,7 +1377,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
@@ -1125,16 +1387,88 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
             });
 
-            modelBuilder.Entity<UserCertifications>(entity =>
+            modelBuilder.Entity<Users>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DisplayName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.FirstName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.UserName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+            });
+
+            modelBuilder.Entity<UsersAddress>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Address1)
+                    .IsRequired()
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Address2)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Address3)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CityId).HasColumnName("CityID");
+
+                entity.Property(e => e.CountryId).HasColumnName("CountryID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.StateId).HasColumnName("StateID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.UsersId).HasColumnName("UsersID");
+
+                entity.HasOne(d => d.Users)
+                    .WithMany(p => p.UsersAddress)
+                    .HasForeignKey(d => d.UsersId)
+                    .HasConstraintName("FK_UsersAddress");
+            });
+
+            modelBuilder.Entity<UsersCertifications>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.CertificationsId).HasColumnName("CertificationsID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Name)
@@ -1143,6 +1477,10 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.QualificationDate).HasColumnType("date");
 
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
                 entity.Property(e => e.UsersId).HasColumnName("UsersID");
 
                 entity.Property(e => e.ValidFrom).HasColumnType("date");
@@ -1150,17 +1488,80 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.ValidTo).HasColumnType("date");
 
                 entity.HasOne(d => d.Certifications)
-                    .WithMany(p => p.UserCertifications)
+                    .WithMany(p => p.UsersCertifications)
                     .HasForeignKey(d => d.CertificationsId)
-                    .HasConstraintName("FK_Certifications");
+                    .HasConstraintName("FK_UsersCertifications");
 
                 entity.HasOne(d => d.Users)
-                    .WithMany(p => p.UserCertifications)
+                    .WithMany(p => p.UsersCertifications)
                     .HasForeignKey(d => d.UsersId)
-                    .HasConstraintName("FK_UsersCertifications");
+                    .HasConstraintName("FK_UsersCertificationsUsers");
             });
 
-            modelBuilder.Entity<UserProfiles>(entity =>
+            modelBuilder.Entity<UsersGroups>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(150)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.GroupsId).HasColumnName("GroupsID");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.UsersId).HasColumnName("UsersID");
+
+                entity.HasOne(d => d.Groups)
+                    .WithMany(p => p.UsersGroups)
+                    .HasForeignKey(d => d.GroupsId)
+                    .HasConstraintName("FK_UsersGroupsGroups");
+
+                entity.HasOne(d => d.Users)
+                    .WithMany(p => p.UsersGroups)
+                    .HasForeignKey(d => d.UsersId)
+                    .HasConstraintName("FK_UsersGroupsUsers");
+            });
+
+            modelBuilder.Entity<UsersPolicies>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.PoliciesId).HasColumnName("PoliciesID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.UsersId).HasColumnName("UsersID");
+
+                entity.HasOne(d => d.Policies)
+                    .WithMany(p => p.UsersPolicies)
+                    .HasForeignKey(d => d.PoliciesId)
+                    .HasConstraintName("FK_UsersPoliciesPolicies");
+
+                entity.HasOne(d => d.Users)
+                    .WithMany(p => p.UsersPolicies)
+                    .HasForeignKey(d => d.UsersId)
+                    .HasConstraintName("FK_UsersPoliciesUsers");
+            });
+
+            modelBuilder.Entity<UsersProfiles>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
@@ -1177,7 +1578,7 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
@@ -1220,6 +1621,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
                 entity.Property(e => e.Title)
                     .HasMaxLength(50)
                     .IsUnicode(false);
@@ -1227,17 +1632,17 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.UsersId).HasColumnName("UsersID");
 
                 entity.HasOne(d => d.Users)
-                    .WithMany(p => p.UserProfiles)
+                    .WithMany(p => p.UsersProfiles)
                     .HasForeignKey(d => d.UsersId)
-                    .HasConstraintName("FK_UserUsersProfiles");
+                    .HasConstraintName("FK_UsersProfilesUsers");
             });
 
-            modelBuilder.Entity<UserQualifications>(entity =>
+            modelBuilder.Entity<UsersQualifications>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Name)
@@ -1248,84 +1653,28 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.QualificationsId).HasColumnName("QualificationsID");
 
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
                 entity.Property(e => e.UniversitiesId).HasColumnName("UniversitiesID");
 
                 entity.Property(e => e.UsersId).HasColumnName("UsersID");
 
                 entity.HasOne(d => d.Qualifications)
-                    .WithMany(p => p.UserQualifications)
+                    .WithMany(p => p.UsersQualifications)
                     .HasForeignKey(d => d.QualificationsId)
-                    .HasConstraintName("FK_Qualifications");
+                    .HasConstraintName("FK_UsersQualificationsQualifications");
 
                 entity.HasOne(d => d.Universities)
-                    .WithMany(p => p.UserQualifications)
+                    .WithMany(p => p.UsersQualifications)
                     .HasForeignKey(d => d.UniversitiesId)
-                    .HasConstraintName("FK_Universities");
+                    .HasConstraintName("FK_UsersQualificationsUniversities");
 
                 entity.HasOne(d => d.Users)
-                    .WithMany(p => p.UserQualifications)
+                    .WithMany(p => p.UsersQualifications)
                     .HasForeignKey(d => d.UsersId)
                     .HasConstraintName("FK_Users");
-            });
-
-            modelBuilder.Entity<Users>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("date")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.DisplayName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.FirstName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.LastName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.UserName)
-                    .HasMaxLength(50)
-                    .IsUnicode(false);
-            });
-
-            modelBuilder.Entity<UsersAddress>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Address1)
-                    .IsRequired()
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Address2)
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Address3)
-                    .HasMaxLength(150)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CityId).HasColumnName("CityID");
-
-                entity.Property(e => e.CountryId).HasColumnName("CountryID");
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("date")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.StateId).HasColumnName("StateID");
-
-                entity.Property(e => e.UsersId).HasColumnName("UsersID");
-
-                entity.HasOne(d => d.Users)
-                    .WithMany(p => p.UsersAddress)
-                    .HasForeignKey(d => d.UsersId)
-                    .HasConstraintName("FK_UsersAddress");
             });
 
             modelBuilder.Entity<ZipCodes>(entity =>
@@ -1339,7 +1688,7 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.Date)
-                    .HasColumnType("date")
+                    .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Isocode)
@@ -1350,6 +1699,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.Name)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
 
                 entity.HasOne(d => d.Cities)
                     .WithMany(p => p.ZipCodes)

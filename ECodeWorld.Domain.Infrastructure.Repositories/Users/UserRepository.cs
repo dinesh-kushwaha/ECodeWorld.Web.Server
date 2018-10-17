@@ -1,4 +1,5 @@
 ﻿using ECodeWorld.Domain.Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,41 +27,41 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.User
             if (string.IsNullOrWhiteSpace(userName))
                 return null;
             else
-                return eCodeWorldContext.Users.FirstOrDefault(u => u.UserName == userName);
+                return eCodeWorldContext.Users.Include(u => u.UsersGroups).FirstOrDefault(u => u.UserName == userName);
 
         }
 
-        public async Task<UserProfiles> GetUserProfile(string userName)
+        public async Task<UsersProfiles> GetUserProfile(string userName)
         {
             var login = eCodeWorldContext.Logins.FirstOrDefault(l => l.UserName == userName);
             if (login == null)
                 return null;
-            return eCodeWorldContext.UserProfiles.FirstOrDefault(l => l.UsersId == login.UsersId);
+            return eCodeWorldContext.UsersProfiles.FirstOrDefault(l => l.UsersId == login.UsersId);
         }
 
-        public async Task<UserProfiles> GetUserProfileById(int userId)
+        public async Task<UsersProfiles> GetUserProfileById(int userId)
         {
             var login = eCodeWorldContext.Logins.FirstOrDefault(l => l.UsersId == userId);
             if (login == null)
                 return null;
-            return eCodeWorldContext.UserProfiles.FirstOrDefault(l => l.UsersId == login.UsersId);
+            return eCodeWorldContext.UsersProfiles.FirstOrDefault(l => l.UsersId == login.UsersId);
         }
 
-        public async Task<IEnumerable<UserProfiles>> GetUserProfiles(int profileType = 0)
+        public async Task<IEnumerable<UsersProfiles>> GetUserProfiles(int profileType = 0)
         {
-            return eCodeWorldContext.UserProfiles;
+            return eCodeWorldContext.UsersProfiles;
         }
 
-        public async Task<int> UpdateUserProfile(UserProfiles userProfiles)
+        public async Task<int> UpdateUserProfile(UsersProfiles userProfiles)
         {
             var userProfile = await GetUserProfileById((int)userProfiles.UsersId);
             if (userProfile == null)
             {
-                eCodeWorldContext.UserProfiles.Add(userProfiles);
+                eCodeWorldContext.UsersProfiles.Add(userProfiles);
             }
             else
             {
-                eCodeWorldContext.UserProfiles.Update(userProfiles);
+                eCodeWorldContext.UsersProfiles.Update(userProfiles);
             }
             return await eCodeWorldContext.SaveChangesAsync();
         }
@@ -70,6 +71,24 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.User
             logins.Users = new Users { UserName = logins.UserName };
             eCodeWorldContext.Logins.Add(logins);
             return await eCodeWorldContext.SaveChangesAsync();
-        } 
+        }
+
+        public async Task<IEnumerable<GroupsRoles>> GetGroupsRoles(int groupId)
+        {
+            return await eCodeWorldContext.GroupsRoles
+                .Include(gr => gr.Groups)
+                .Include(gr => gr.Roles.RolesPermissions)
+                .Where(gr => gr.GroupsId == groupId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<RolesPermissions>> GetRolesPermissions(int roleId)
+        {
+            return await eCodeWorldContext.RolesPermissions
+                .Include(r => r.Ecwresources)
+                .Include(r => r.Permissions)
+                .Where(rp => rp.RolesId == roleId)
+                .ToListAsync();
+        }
     }
 }

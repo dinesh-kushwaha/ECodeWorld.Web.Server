@@ -13,7 +13,7 @@ namespace ECodeWorld.Domain.Tests
         public class ConnectionStringsConfig
         {
             public string MyDb { get; set; }
-            public string MyLegacyDb { get; set; }
+            public string ECodeWorldDatabase { get; set; }
         }
 
         public class ApiSettingsConfig

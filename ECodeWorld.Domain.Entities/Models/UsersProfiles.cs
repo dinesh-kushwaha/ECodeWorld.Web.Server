@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ECodeWorld.Domain.Entities.Models
 {
-    public partial class UserProfiles
+    public partial class UsersProfiles
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
@@ -22,6 +22,7 @@ namespace ECodeWorld.Domain.Entities.Models
         public string Avtar { get; set; }
         public int? UsersId { get; set; }
         public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Users Users { get; set; }
     }

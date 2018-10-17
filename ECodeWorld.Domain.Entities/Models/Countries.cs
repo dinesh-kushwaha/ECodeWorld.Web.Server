@@ -16,6 +16,7 @@ namespace ECodeWorld.Domain.Entities.Models
         public string Code { get; set; }
         public string Isocode { get; set; }
         public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public ICollection<CountriesMl> CountriesMl { get; set; }
         public ICollection<States> States { get; set; }

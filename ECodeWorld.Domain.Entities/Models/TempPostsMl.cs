@@ -13,6 +13,8 @@ namespace ECodeWorld.Domain.Entities.Models
         public string Keywords { get; set; }
         public string Contents { get; set; }
         public int Status { get; set; }
+        public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Languages Language { get; set; }
         public TempPosts TempPosts { get; set; }

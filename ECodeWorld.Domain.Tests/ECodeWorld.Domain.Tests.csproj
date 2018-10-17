@@ -7,20 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="appsettings.Development.json" />
     <None Remove="appsettings.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="appsettings.Development.json">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
     <Content Include="appsettings.json">
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.1" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
@@ -33,6 +31,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ECodeWorld.Domain.Application.Services\ECodeWorld.Domain.Application.Services.csproj" />
+    <ProjectReference Include="..\ECodeWorld.Domain.CrossCutting.DIResolver\ECodeWorld.Domain.CrossCutting.DIResolver.csproj" />
     <ProjectReference Include="..\ECodeWorld.Domain.CrossCutting.Security\ECodeWorld.Domain.CrossCutting.Security.csproj" />
     <ProjectReference Include="..\ECodeWorld.Domain.Infrastructure.Repositories\ECodeWorld.Domain.Infrastructure.Repositories.csproj" />
   </ItemGroup>

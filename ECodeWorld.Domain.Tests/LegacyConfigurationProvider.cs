@@ -3,7 +3,8 @@ using System.Configuration;
 
 namespace ECodeWorld.Domain.Tests
 {
-    public class LegacyConfigurationProvider : ConfigurationProvider, IConfigurationSource
+    public class LegacyConfigurationProvider : ConfigurationProvider,
+        IConfigurationSource
     {
         public override void Load()
         {

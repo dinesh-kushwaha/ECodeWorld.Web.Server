@@ -4,9 +4,6 @@ using ECodeWorld.Domain.Dtos.Users;
 using ECodeWorld.Domain.Infrastructure.Repositories.Authentication;
 using ECodeWorld.Domain.Infrastructure.Repositories.User;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace ECodeWorld.Domain.Tests.Services

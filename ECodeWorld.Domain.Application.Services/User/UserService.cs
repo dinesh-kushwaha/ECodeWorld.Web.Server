@@ -81,7 +81,7 @@ namespace ECodeWorld.Domain.Application.Services.User
         public async Task<ResponseDto> UpdateUserProfile(UserProfileDto userProfileDto)
         {
             var user = await this.GetUserByUserName(userProfileDto.UserName);
-            var userProfile = this.authMapper.Configuration.Map<UserProfiles>(userProfileDto);
+            var userProfile = this.authMapper.Configuration.Map<UsersProfiles>(userProfileDto);
             userProfile.UsersId = user.Id;
             var userId = await this.userRepository.UpdateUserProfile(userProfile);
             return new ResponseDto { Id = userId };

@@ -13,8 +13,8 @@ namespace ECodeWorld.Domain.CrossCutting.Adapters.Usres
             {
                 return new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<UserProfileDto, UserProfiles>();
-                    cfg.CreateMap<UserProfiles, UserProfileDto>();
+                    cfg.CreateMap<UserProfileDto, UsersProfiles>();
+                    cfg.CreateMap<UsersProfiles, UserProfileDto>();
                 }).CreateMapper();
             }
         }

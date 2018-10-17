@@ -20,6 +20,7 @@ namespace ECodeWorld.Domain.Entities.Models
         public int? AuthorsId { get; set; }
         public int? PostsId { get; set; }
         public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Users Authors { get; set; }
         public Posts Posts { get; set; }

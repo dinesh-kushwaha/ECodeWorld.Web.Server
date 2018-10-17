@@ -7,7 +7,7 @@ namespace ECodeWorld.Domain.Entities.Models
     {
         public TempPosts()
         {
-            PostReviews = new HashSet<PostReviews>();
+            PostReviewers = new HashSet<PostReviewers>();
             TempPostsMl = new HashSet<TempPostsMl>();
         }
 
@@ -25,15 +25,16 @@ namespace ECodeWorld.Domain.Entities.Models
         public int Status { get; set; }
         public int LikeCounts { get; set; }
         public int CommentCounts { get; set; }
-        public DateTime Date { get; set; }
         public int? PostStatusId { get; set; }
+        public DateTime Date { get; set; }
+        public byte[] Timestamp { get; set; }
 
         public Users Author { get; set; }
         public PostCategories Category { get; set; }
         public ComplexityLevels ComplexityLevels { get; set; }
         public PostStatus PostStatus { get; set; }
         public PostTypes PostTypes { get; set; }
-        public ICollection<PostReviews> PostReviews { get; set; }
+        public ICollection<PostReviewers> PostReviewers { get; set; }
         public ICollection<TempPostsMl> TempPostsMl { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using ECodeWorld.Domain.Application.Services.Accounts;
 using ECodeWorld.Domain.Application.Services.Authentication;
 using ECodeWorld.Domain.Application.Services.Masters;
 using ECodeWorld.Domain.Application.Services.Posts;
@@ -12,6 +13,7 @@ namespace ECodeWorld.Domain.CrossCutting.DIResolver
         {
             builder.RegisterType<AuthenticationService>().As<IAuthenticationService>();
             builder.RegisterType<UserService>().As<IUserService>();
+            builder.RegisterType<AccountsService>().As<IAccountsService>();
             builder.RegisterType<PostsService>().As<IPostsService>();
             builder.RegisterType<TempPostsService>().As<ITempPostsService>();
 

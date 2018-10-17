@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ECodeWorld.Domain.Application.Services.Authentication;
-using ECodeWorld.Domain.Application.Services.User;
+﻿using ECodeWorld.Domain.Application.Services.Accounts;
+using ECodeWorld.Domain.CrossCutting.Adapters.Accounts;
+using ECodeWorld.Domain.Dtos.Accounts;
 using Microsoft.AspNetCore.Cors;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 
 namespace ECodeWorld.Web.API.Controllers.Accounts
 {
@@ -15,13 +12,16 @@ namespace ECodeWorld.Web.API.Controllers.Accounts
     [EnableCors("CorsPolicy")]
     public class AccountsController : Controller
     {
-        private readonly IAuthenticationService authenticationService;
-        private readonly IUserService userService;
-        public AccountsController(IAuthenticationService authenticationService, IUserService userService)
+        private readonly IAccountsService accountsService;
+        public AccountsController(IAccountsService accountsService)
         {
-            this.authenticationService = authenticationService;
-            this.userService = userService;
+            this.accountsService = accountsService;
         }
 
+        [HttpGet("Permissions")]
+        public async Task<AccountsDto> GetPermissions(string userName)
+        {
+            return await accountsService.GetAccounts(userName);
+        }
     }
 }

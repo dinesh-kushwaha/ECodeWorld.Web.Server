@@ -24,7 +24,6 @@ namespace ECodeWorld.Domain.CrossCutting.Adapters.Posts
                     ForMember(x => x.PostStatus, opt => opt.Ignore()).
                     ForMember(x => x.PostTypes, opt => opt.Ignore()).
                     ForMember(x => x.TempPostsMl, opt => opt.Ignore()).
-                    ForMember(x => x.PostReviews, opt => opt.Ignore()).
                     ReverseMap();
                 }).CreateMapper();
             }

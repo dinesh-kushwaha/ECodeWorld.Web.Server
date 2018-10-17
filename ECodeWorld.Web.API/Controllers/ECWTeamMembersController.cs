@@ -14,11 +14,11 @@ namespace ECodeWorld.Web.API.Controllers
 
         // GET: api/ECWTeamMembers
         [HttpGet]
-        public IEnumerable<UserProfiles> Get()
+        public IEnumerable<UsersProfiles> Get()
         {
             using (var db = new ECodeWorldContext())
             {
-                return db.UserProfiles.ToList();
+                return db.UsersProfiles.ToList();
             }
         }
 
@@ -28,7 +28,7 @@ namespace ECodeWorld.Web.API.Controllers
         {
             using (var db = new ECodeWorldContext())
             {
-                return db.UserProfiles.Where(x => x.Id == id).FirstOrDefault();
+                return db.UsersProfiles.Where(x => x.Id == id).FirstOrDefault();
             }
         }
         
@@ -49,7 +49,7 @@ namespace ECodeWorld.Web.API.Controllers
         {
             using (var db = new ECodeWorldContext())
             {
-                var userProfileInDB = db.UserProfiles.Where(x => x.Id == id).FirstOrDefault();
+                var userProfileInDB = db.UsersProfiles.Where(x => x.Id == id).FirstOrDefault();
                 if (userProfileInDB != null)
                 {
                     //userProfileInDB.Description = userProfile.Description;
