@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ECodeWorld.Database.publish.xml" />
+    <None Include="ECodeWorld_1.Database.publish.xml" />
   </ItemGroup>
   <Target Name="PreDeployEvent">
     <Message Importance="high" Text="Pre deployment event" />

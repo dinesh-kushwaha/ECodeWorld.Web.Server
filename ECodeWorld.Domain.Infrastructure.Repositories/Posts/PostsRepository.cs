@@ -136,7 +136,7 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.Posts
 
         public async Task<M.TempPosts> GetTempPost(int postId)
         {
-            return await eCodeWorldContext.TempPosts.Include(x=>x.Author).FirstOrDefaultAsync(p => p.Id == postId);
+            return await eCodeWorldContext.TempPosts.Include(x => x.Author).FirstOrDefaultAsync(p => p.Id == postId);
         }
 
         public async Task<IEnumerable<M.TempPosts>> UserPostsLightWeight(SearchCriteria searchCriteria, int userId)
@@ -144,12 +144,13 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.Posts
             if (searchCriteria.PageSize == 0)
             {
                 return await eCodeWorldContext.TempPosts.
-                    OrderByDescending(p => p.AuthorId == userId).
+                    OrderByDescending(p => p.Id).
+                    Where(p => p.AuthorId == searchCriteria.UserId).
                     Select(x => new M.TempPosts
                     {
                         Id = x.Id,
                         Title = x.Title,
-                        PostUrl=x.PostUrl,
+                        PostUrl = x.PostUrl,
                         Description = x.Description,
                         Date = x.Date
                     }).ToListAsync();
@@ -157,7 +158,8 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.Posts
             else
             {
                 return await eCodeWorldContext.TempPosts.
-                    OrderByDescending(p => p.AuthorId == userId).
+                    OrderByDescending(p => p.Id).
+                    Where(p => p.AuthorId == searchCriteria.UserId).
                     Skip(searchCriteria.PageSize * (searchCriteria.PageNumber - 1)).
                     Take(searchCriteria.PageSize).
                      Select(x => new M.TempPosts

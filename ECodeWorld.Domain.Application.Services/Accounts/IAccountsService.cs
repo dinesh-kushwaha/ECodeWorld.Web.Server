@@ -8,6 +8,8 @@ namespace ECodeWorld.Domain.Application.Services.Accounts
 {
     public interface IAccountsService
     {
-        Task<AccountsDto> GetAccounts(string userName);
+        Task<AccountsDto> GetAccounts(int userId);
+        Task<UsersProfilesDto> GetMember(int memberId);
+        Task<IEnumerable<UsersProfilesDto>> GetMembers(bool isWebUser);
     }
 }

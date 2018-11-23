@@ -1,4 +1,6 @@
-﻿using ECodeWorld.Web.API.Models;
+﻿using ECodeWorld.Web.API.DataMapping;
+using ECodeWorld.Web.API.Enums;
+using ECodeWorld.Web.API.Models;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +15,7 @@ namespace ECodeWorld.Web.API.Controllers
     [Produces("application/json")]
     [Route("api/Images")]
     [EnableCors("CorsPolicy")]
-    [Consumes("image/jpeg", "image/png", "image/gif")]
+    //[Consumes("image/jpeg", "image/png", "image/gif")]
     public class ImagesController : Controller
     {
         private IHostingEnvironment _hostingEnvironment;
@@ -40,8 +42,8 @@ namespace ECodeWorld.Web.API.Controllers
             return Json("Files Uploaded");
         }
 
-        [HttpPost("UploadFiles")]
-        public async Task<IActionResult> UploadFiles(IEnumerable<IFormFile> files)
+        [HttpPost("UploadFiles/{documentType}/{newFileName}")]
+        public async Task<IActionResult> UploadFiles(IEnumerable<IFormFile> files, DocumentTypesEnum documentType, string newFileName)
         {
             var fileResponse = new List<FileResponse>();
             foreach (var file in files)
@@ -52,35 +54,39 @@ namespace ECodeWorld.Web.API.Controllers
                         return Content("file not selected");
 
                     var ext = Path.GetExtension(file.FileName);
+                    newFileName = newFileName + ext;
 
                     if (!GetMimeTypes().ContainsKey(ext))
                         return Content("Invalid file.");
 
-                    var rnd = new Random();
-                    int preFix = rnd.Next(1, 100);
+                    //var rnd = new Random();
+                    //int preFix = rnd.Next(1, 100);
 
-                    var fileNameWithoutExt = Path.GetFileNameWithoutExtension(file.FileName);
-                    var fileName = preFix + fileNameWithoutExt + ext;
+                    //var fileNameWithoutExt = Path.GetFileNameWithoutExtension(file.FileName);
+                    //var fileName = preFix + fileNameWithoutExt + ext;
+
+                    //string webRootPath = _hostingEnvironment.WebRootPath;
+                    //string dateFolder = DateTime.Now.ToString("MM_dd_yyyy");
 
                     string webRootPath = _hostingEnvironment.WebRootPath;
-                    string dateFolder = DateTime.Now.ToString("MM_dd_yyyy");
+                    var folder = FolderDataMapping.GetFolder(documentType);
 
-                    string newPath = Path.Combine(webRootPath, "static", "images", dateFolder);
+                    string newPath = Path.Combine(webRootPath, folder);
                     if (!Directory.Exists(newPath))
                     {
                         Directory.CreateDirectory(newPath);
                     }
-                    var path = Path.Combine(newPath, fileName);
+                    var path = Path.Combine(newPath, newFileName);
 
                     using (var stream = new FileStream(path, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);
                         fileResponse.Add(new FileResponse
                         {
-                            Name = fileName,
+                            Name = newFileName,
                             Extension = ext,
-                            Folder = dateFolder,
-                            File = fileName
+                            Folder = folder,
+                            File = newFileName
                         });
                     }
                 }
@@ -93,7 +99,7 @@ namespace ECodeWorld.Web.API.Controllers
             return Json(fileResponse);
         }
 
-        [HttpGet]
+        [HttpGet("Download")]
         public async Task<IActionResult> Download(string filename)
         {
             if (filename == null)
@@ -128,6 +134,32 @@ namespace ECodeWorld.Web.API.Controllers
                 {".jpeg", "image/jpeg"},
                 {".gif", "image/gif"},
             };
+        }
+
+        [HttpGet("FetchImage/{folder}/{file}")]
+        public async Task<string> FetchImage(string folder, string fileName)
+        {
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", folder, fileName);
+            var ext = Path.GetExtension(imagePath);
+            var types = GetMimeTypes();
+            byte[] imageByteData = await System.IO.File.ReadAllBytesAsync(imagePath);
+            string imageBase64Data = Convert.ToBase64String(imageByteData);
+            return string.Format("data:{0};base64,{1}", types[ext], imageBase64Data);
+        }
+
+        //http://localhost:44396/api/Images/ShowImage?folder=static\images\avtars&fileName=2.jpg
+        [HttpGet("GetImage/{documentType}/{fileName}")]
+        public async Task<string> ShowImage(DocumentTypesEnum documentType, string fileName)
+        {
+
+            string webRootPath = _hostingEnvironment.WebRootPath;
+            var folder = FolderDataMapping.GetFolder(documentType);
+            string imagePath = Path.Combine(webRootPath, folder, fileName);
+            byte[] imageByteData = await System.IO.File.ReadAllBytesAsync(imagePath);
+            string imageBase64Data = Convert.ToBase64String(imageByteData,0, imageByteData.Length);
+            string ext = Path.GetExtension(imagePath);
+            var mimeTypes = GetMimeTypes();
+            return string.Format("data:{0};base64, {1}", mimeTypes[ext], imageBase64Data);
         }
     }
 }

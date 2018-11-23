@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Cors;
+﻿using ECodeWorld.Web.API.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -79,9 +81,10 @@ namespace ECodeWorld.Web.API.Controllers
             try
             {
                 //var file = Request.Form.Files[0];
-                string folderName = "Upload";
+                var fileResponse = new List<FileResponse>();
+                string folderName = "avtars";
                 string webRootPath = _hostingEnvironment.WebRootPath;
-                string newPath = Path.Combine(webRootPath, folderName);
+                string newPath = Path.Combine(webRootPath, "static", "images", folderName);
                 if (!Directory.Exists(newPath))
                 {
                     Directory.CreateDirectory(newPath);
@@ -95,14 +98,46 @@ namespace ECodeWorld.Web.API.Controllers
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         file.CopyToAsync(stream);
+                        fileResponse.Add(new FileResponse
+                        {
+                            Name = fileName,
+                            Extension = ext,
+                            Folder = folderName,
+                            File = fileName,
+                            Message = "Upload Successful"
+                        });
                     }
                 }
-                return Json("Upload Successful.");
+                return Json(fileResponse);
             }
             catch (System.Exception ex)
             {
                 return Json("Upload Failed: " + ex.Message);
             }
+        }
+
+
+        private Dictionary<string, string> GetMimeTypes()
+        {
+            return new Dictionary<string, string>
+            {
+                {".png", "image/png"},
+                {".jpg", "image/jpeg"},
+                {".jpeg", "image/jpeg"},
+                {".gif", "image/gif"},
+            };
+        }
+
+
+        [HttpGet]
+        public async Task<string> GetImage(string relativePath)
+        {
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", relativePath);
+            var ext = Path.GetExtension(imagePath);
+            var types = GetMimeTypes();
+            byte[] imageByteData = await System.IO.File.ReadAllBytesAsync(imagePath);
+            string imageBase64Data = Convert.ToBase64String(imageByteData);
+            return string.Format("data:{0};base64,{1}", types[ext], imageBase64Data);
         }
     }
 }

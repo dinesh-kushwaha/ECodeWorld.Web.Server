@@ -15,5 +15,7 @@ namespace ECodeWorld.Domain.Application.Services.Posts
         Task<TempPostsDto> GetTempPost(int postId);
         Task<IEnumerable<TempPostsDto>> GetTempPosts(SearchCriteriaDto searchCriteriaDto, int userId);
         Task<IEnumerable<TempPostsDto>> GetTempPostssLightWeight(SearchCriteriaDto searchCriteriaDto, int userId);
+
+        Task<ResponseDto> TempPostReview(PostReviewersDto postReviewersDto);
     }
 }

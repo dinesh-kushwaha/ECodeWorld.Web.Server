@@ -36,11 +36,11 @@ namespace ECodeWorld.Web.API.Controllers
         {
             return await this.userService.CreateUser(userDto);
         }
-        [HttpPost("UpdateUserProfile")]
-        public async Task<ResponseDto> UpdateUserProfile([FromBody]UserProfileDto userProfileDto)
-        {
-            return await this.userService.UpdateUserProfile(userProfileDto);
-        }
+        //[HttpPost("UpdateUserProfile")]
+        //public async Task<ResponseDto> UpdateUserProfile([FromBody]UserProfileDto userProfileDto)
+        //{
+        //    return await this.userService.UpdateUserProfile(userProfileDto);
+        //}
 
     }
 }

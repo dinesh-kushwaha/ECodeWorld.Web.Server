@@ -102,5 +102,10 @@ namespace ECodeWorld.Domain.Application.Services.Posts
             var entities = await this.postRepository.UserPostsLightWeight(searchCriteria, userId);
             return this.tempPostsMapper.Configuration.Map<IEnumerable<TempPostsDto>>(entities);
         }
+
+        public Task<ResponseDto> TempPostReview(PostReviewersDto postReviewersDto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

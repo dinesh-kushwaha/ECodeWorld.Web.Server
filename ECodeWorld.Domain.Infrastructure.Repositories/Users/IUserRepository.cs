@@ -6,10 +6,11 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.User
 {
     public interface IUserRepository
     {
+        Task<Users> GetUser(int userId);
         Task<Users> GetUserByUserName(string userName);
-        Task<UsersProfiles> GetUserProfile(string userName);
-        Task<UsersProfiles> GetUserProfileById(int userId);
-        Task<IEnumerable<UsersProfiles>> GetUserProfiles(int profileType = 0);
+        Task<UsersProfiles> GetUserProfile(int memberId);
+       
+        Task<IEnumerable<UsersProfiles>> GetUserProfiles(bool isWebUser);
         Task<int> UpdateUserProfile(UsersProfiles userProfiles);
         Task<int> CreateLogin(Logins logins);
 

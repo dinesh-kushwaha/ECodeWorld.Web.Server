@@ -1,10 +1,13 @@
 ﻿CREATE TABLE [dbo].[UsersProfiles]
 (
 	[ID] INT IDENTITY(1,1) NOT NULL CONSTRAINT PK_UsersProfiles PRIMARY KEY, 
-    [FirstName] VARCHAR(50) NULL, 
+    [FirstName] VARCHAR(50) NOT NULL, 
+	[MiddleName] VARCHAR(50) NULL, 
     [LastName] VARCHAR(50) NULL, 
 	[DisplayName] VARCHAR(50) NULL,
 	[Title] VARCHAR(50) NULL,
+	[CompanyName] VARCHAR(50) NULL,
+	[HighestQualification] VARCHAR(50) NULL,
 	[Description] VARCHAR(50) NULL,
 	[Keywords] VARCHAR(50) NULL,
 	[Email] VARCHAR(50) NULL,

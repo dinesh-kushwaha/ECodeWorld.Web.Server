@@ -5,6 +5,7 @@
     [LastName] VARCHAR(50) NULL, 
     [UserName] VARCHAR(50) NULL,
 	[DisplayName] VARCHAR(50) NULL,
+	[IsWebUser] bit NOT NULL DEFAULT 1,
 	[Date]  DATETIME NOT NULL DEFAULT GETDATE(),
 	[Timestamp] ROWVERSION  NOT NULL,
 )

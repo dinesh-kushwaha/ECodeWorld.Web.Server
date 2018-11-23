@@ -1,11 +1,13 @@
-﻿using System;
+﻿using ECodeWorld.Domain.Dtos.Core;
+using ECodeWorld.Domain.Dtos.Users;
+using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace ECodeWorld.Domain.Entities.Models
+namespace ECodeWorld.Domain.Dtos.Accounts
 {
-    public partial class UsersProfiles
+    public class UsersProfilesDto : DtoBase
     {
-        public int Id { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
@@ -26,7 +28,6 @@ namespace ECodeWorld.Domain.Entities.Models
         public int? UsersId { get; set; }
         public DateTime Date { get; set; }
         public byte[] Timestamp { get; set; }
-
-        public Users Users { get; set; }
+        public UsersDto Users { get; set; }
     }
 }

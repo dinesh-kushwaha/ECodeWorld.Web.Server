@@ -1,4 +1,5 @@
 ﻿using ECodeWorld.Domain.Application.Services.Core;
+using ECodeWorld.Domain.Dtos.Accounts;
 using ECodeWorld.Domain.Dtos.Message;
 using ECodeWorld.Domain.Dtos.Users;
 using ECodeWorld.Domain.Entities.Models;
@@ -13,7 +14,7 @@ namespace ECodeWorld.Domain.Application.Services.User
         Task<UserProfileDto> GetUserProfile(string userName);
         Task<UserProfileDto> GetUserProfileById(int userId);
         Task<IEnumerable<UserProfileDto>> GetUserProfiles(int profileType = 0);
-        Task<ResponseDto> UpdateUserProfile(UserProfileDto userProfileDto);
+        Task<ResponseDto> UpdateUserProfile(AccountsDto accountsDto);
         Task<UserDto> CreateUser(UserDto userDto);
 
     }

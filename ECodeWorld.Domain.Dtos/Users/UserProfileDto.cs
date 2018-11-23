@@ -7,6 +7,7 @@ namespace ECodeWorld.Domain.Dtos.Users
 {
     public class UserProfileDto : DtoBase
     {
+        public int UserId { get; set; }
         public string UserName { get; set; }
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
@@ -16,6 +17,6 @@ namespace ECodeWorld.Domain.Dtos.Users
         public string Description { get; set; }
         public string HighestQualification { get; set; }
         public string AboutMe { get; set; }
-
+        public string Avtar { get; set; }
     }
 }

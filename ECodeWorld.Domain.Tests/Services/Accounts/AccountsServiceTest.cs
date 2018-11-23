@@ -18,7 +18,7 @@ namespace ECodeWorld.Domain.Tests.Services.Accounts
         {
             IAccountsService accountsService = this.AutofacContainer.Resolve<IAccountsService>();
             //string userName = "dinesh.kushwaha@ecw.com";
-            string userName = "jyoti.kushwah@ecw.com";
+            int userName =1;
             var accountPermissions = await accountsService.GetAccounts(userName);
             Assert.True(accountPermissions != null);
         }

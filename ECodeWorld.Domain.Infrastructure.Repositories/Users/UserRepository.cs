@@ -5,11 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace ECodeWorld.Domain.Infrastructure.Repositories.User
 {
     public class UserRepository : IUserRepository
     {
         private readonly ECodeWorldContext eCodeWorldContext;
+
 
         public UserRepository()
         {
@@ -20,7 +22,36 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.User
             eCodeWorldContext = new ECodeWorldContext(connectionString, cacheTimespan);
         }
 
+        public async Task<Users> GetUser(int userId)
+        {
+            return eCodeWorldContext.Users.Include(u => u.UsersGroups).
+                Include(u => u.UsersProfiles).
+                //Include(u => u.UsersQualifications.Select(x => x.Qualifications)).
+                //Include(u => u.UsersCertifications.Select(x => x.Certifications)).
+                Include(u => u.UsersQualifications).
+                Include(u => u.UsersCertifications).
+                Include(u => u.UsersAddress).
+                Include(u => u.UsersPolicies).
+                Include(u => u.UsersPolicies).FirstOrDefault(u => u.Id == userId);
 
+        }
+
+        public async Task<UsersProfiles> GetUserProfile(int userId)
+        {
+            return await eCodeWorldContext.UsersProfiles.FirstOrDefaultAsync(u => u.Id == userId);
+
+        }
+
+        public async Task<IEnumerable<UsersProfiles>> GetUserProfiles(bool isWebUser)
+        {
+            return await eCodeWorldContext.UsersProfiles.Join(eCodeWorldContext.Users,
+                up => up.UsersId,
+                u => u.Id,
+                (up, u) => new { userProfile = up, user = u }).
+                Where(upu => upu.user.IsWebUser == isWebUser).
+                Select(s => s.userProfile).ToListAsync();
+
+        }
 
         public async Task<Users> GetUserByUserName(string userName)
         {
@@ -31,37 +62,27 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.User
 
         }
 
-        public async Task<UsersProfiles> GetUserProfile(string userName)
+        public async Task<int> UpdateUserProfile(UsersProfiles newUserProfiles)
         {
-            var login = eCodeWorldContext.Logins.FirstOrDefault(l => l.UserName == userName);
-            if (login == null)
-                return null;
-            return eCodeWorldContext.UsersProfiles.FirstOrDefault(l => l.UsersId == login.UsersId);
-        }
-
-        public async Task<UsersProfiles> GetUserProfileById(int userId)
-        {
-            var login = eCodeWorldContext.Logins.FirstOrDefault(l => l.UsersId == userId);
-            if (login == null)
-                return null;
-            return eCodeWorldContext.UsersProfiles.FirstOrDefault(l => l.UsersId == login.UsersId);
-        }
-
-        public async Task<IEnumerable<UsersProfiles>> GetUserProfiles(int profileType = 0)
-        {
-            return eCodeWorldContext.UsersProfiles;
-        }
-
-        public async Task<int> UpdateUserProfile(UsersProfiles userProfiles)
-        {
-            var userProfile = await GetUserProfileById((int)userProfiles.UsersId);
-            if (userProfile == null)
+            var oldUserProfile = await eCodeWorldContext.UsersProfiles.FirstOrDefaultAsync(x => x.UsersId == newUserProfiles.UsersId);
+            if (oldUserProfile == null)
             {
-                eCodeWorldContext.UsersProfiles.Add(userProfiles);
+                eCodeWorldContext.UsersProfiles.Add(newUserProfiles);
             }
             else
             {
-                eCodeWorldContext.UsersProfiles.Update(userProfiles);
+                oldUserProfile.FirstName = newUserProfiles.FirstName;
+                oldUserProfile.MiddleName = newUserProfiles.MiddleName;
+                oldUserProfile.LastName = newUserProfiles.LastName;
+                oldUserProfile.DisplayName = $"{newUserProfiles.FirstName} {newUserProfiles.MiddleName} { newUserProfiles.LastName}";
+                oldUserProfile.Title = newUserProfiles.Title;
+                oldUserProfile.CompanyName = newUserProfiles.CompanyName;
+                oldUserProfile.HighestQualification = newUserProfiles.HighestQualification;
+                oldUserProfile.Description = newUserProfiles.Description;
+                oldUserProfile.Description = newUserProfiles.Description;
+                oldUserProfile.AboutMe = newUserProfiles.AboutMe;
+                oldUserProfile.Avtar = newUserProfiles.Avtar;
+                eCodeWorldContext.UsersProfiles.Update(oldUserProfile);
             }
             return await eCodeWorldContext.SaveChangesAsync();
         }

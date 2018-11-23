@@ -25,6 +25,7 @@ namespace ECodeWorld.Domain.Entities.Models
         public string LastName { get; set; }
         public string UserName { get; set; }
         public string DisplayName { get; set; }
+        public bool IsWebUser { get; set; }
         public DateTime Date { get; set; }
         public byte[] Timestamp { get; set; }
 

@@ -1,6 +1,7 @@
 ﻿using ECodeWorld.Domain.Application.Specifications.User;
 using ECodeWorld.Domain.CrossCutting.Adapters.Usres;
 using ECodeWorld.Domain.CrossCutting.Security;
+using ECodeWorld.Domain.Dtos.Accounts;
 using ECodeWorld.Domain.Dtos.Authentication;
 using ECodeWorld.Domain.Dtos.Message;
 using ECodeWorld.Domain.Dtos.Users;
@@ -8,6 +9,7 @@ using ECodeWorld.Domain.Entities.Models;
 using ECodeWorld.Domain.Infrastructure.Repositories.User;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ECodeWorld.Domain.Application.Services.User
@@ -64,7 +66,7 @@ namespace ECodeWorld.Domain.Application.Services.User
 
         public async Task<UserProfileDto> GetUserProfile(string userName)
         {
-            var userProfile = await this.userRepository.GetUserProfile(userName);
+            var userProfile = await this.userRepository.GetUserProfile(1);
             return this.authMapper.Configuration.Map<UserProfileDto>(userProfile);
         }
 
@@ -78,13 +80,17 @@ namespace ECodeWorld.Domain.Application.Services.User
             throw new NotImplementedException();
         }
 
-        public async Task<ResponseDto> UpdateUserProfile(UserProfileDto userProfileDto)
+        public async Task<ResponseDto> UpdateUserProfile(AccountsDto accountsDto)
         {
-            var user = await this.GetUserByUserName(userProfileDto.UserName);
-            var userProfile = this.authMapper.Configuration.Map<UsersProfiles>(userProfileDto);
-            userProfile.UsersId = user.Id;
-            var userId = await this.userRepository.UpdateUserProfile(userProfile);
-            return new ResponseDto { Id = userId };
+            var _user = await this.userRepository.GetUser(accountsDto.Id);
+            var _userProfile = accountsDto?.UsersProfiles?.FirstOrDefault();
+            if (_user!=null && _userProfile != null)
+            {
+                var userProfile = this.authMapper.Configuration.Map<UsersProfiles>(_userProfile);
+                userProfile.UsersId = _user.Id;
+                var userId = await this.userRepository.UpdateUserProfile(userProfile);
+            }
+            return new ResponseDto { Id = _user.Id };
         }
     }
 }

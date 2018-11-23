@@ -35,9 +35,10 @@ namespace ECodeWorld.Web.API
             });
 
             services.AddMvc().AddControllersAsServices();
+            // Register the Swagger generator, defining 1 or more Swagger documents
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "e Code World API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
             });
 
             //https://docs.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-2.1
@@ -194,22 +195,20 @@ namespace ECodeWorld.Web.API
             // app.UseCors(builder =>builder.WithOrigins("https://www.ecodeworld.com").AllowAnyHeader());
 
             // IMPORTANT: Make sure UseCors() is called BEFORE this
-            //app.UseMvc();
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
 
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.  
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.  
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), 
+            // specifying the Swagger JSON endpoint.
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "e Code World API V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
             });
+
+            app.UseMvc();
 
         }
     }

@@ -57,21 +57,23 @@ namespace ECodeWorld.Domain.Application.Services.Authentication
 
             var userLogin = await this.loginRepository.GetLogin(userDto.UserName);
             if (userLogin == null)
+            {
                 authenticationDto.AddRule("userDto", "Invalid UserName.");
+                return authenticationDto;
+            }
 
             if (!ECWRNGRfcSaltedHashManager.VerifyPassword(userDto.Password, userLogin.PasswordHash, userLogin.PasswordSalt))
                 authenticationDto.AddRule("userDto", "UserName or password is incorrect.");
             else
             {
                 authenticationDto.IsAuthenticated = true;
-                var userProfile = await this.userRepository.GetUserProfileById((int)userLogin?.UsersId);
-                if (userProfile != null)
+                var user = await this.userRepository.GetUserByUserName(userDto.UserName);
+                if (user != null)
                 {
-                    authenticationDto.Id = (int)userProfile?.UsersId;
-                    authenticationDto.Name = string.IsNullOrWhiteSpace(userProfile.DisplayName) ?
-                        userProfile.LastName + "," + userProfile.FirstName : userProfile.DisplayName;
+                    authenticationDto.Id = user.Id;
+                    authenticationDto.Name = user.DisplayName;
                 }
-                    authenticationDto.AddRule("Success", "Authentication is successfull.");
+                authenticationDto.AddRule("Success", "Authentication is successfull.");
             }
             return authenticationDto;
         }

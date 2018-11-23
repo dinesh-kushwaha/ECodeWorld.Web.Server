@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
-namespace ECodeWorld.Domain.Entities.Models
+namespace ECodeWorld.Domain.Dtos.Accounts
 {
-    public partial class UsersProfiles
+    public class UsersPoliciesDto
     {
         public int Id { get; set; }
         public string FirstName { get; set; }
-        public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string DisplayName { get; set; }
         public string Title { get; set; }
-        public string CompanyName { get; set; }
-        public string HighestQualification { get; set; }
         public string Description { get; set; }
         public string Keywords { get; set; }
         public string Email { get; set; }
@@ -25,8 +23,5 @@ namespace ECodeWorld.Domain.Entities.Models
         public string Avtar { get; set; }
         public int? UsersId { get; set; }
         public DateTime Date { get; set; }
-        public byte[] Timestamp { get; set; }
-
-        public Users Users { get; set; }
     }
 }

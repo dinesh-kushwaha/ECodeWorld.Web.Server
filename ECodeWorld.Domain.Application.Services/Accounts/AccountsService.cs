@@ -16,13 +16,14 @@ namespace ECodeWorld.Domain.Application.Services.Accounts
             this.userRepository = userRepository;
             this.accountsMapper = accountsMapper;
         }
-        public async Task<AccountsDto> GetAccounts(string userName)
+        public async Task<AccountsDto> GetAccounts(int userId)
         {
             var accountsDto = new AccountsDto();
-            var userEntity = await this.userRepository.GetUserByUserName(userName);
+            var userEntity = await this.userRepository.GetUser(userId);
             if (userEntity == null)
                 return accountsDto;
             accountsDto = accountsMapper.Configuration.Map<AccountsDto>(userEntity);
+
             var groupsDtos = new List<EcwresourcesDto>();
             foreach (var group in userEntity.UsersGroups)
             {
@@ -39,6 +40,18 @@ namespace ECodeWorld.Domain.Application.Services.Accounts
                 }
             }
             return accountsDto;
+        }
+
+        public async Task<UsersProfilesDto> GetMember(int memberId)
+        {
+            var userProfileEntity = await this.userRepository.GetUserProfile(memberId);
+            return accountsMapper.Configuration.Map<UsersProfilesDto>(userProfileEntity);
+        }
+
+        public async Task<IEnumerable<UsersProfilesDto>> GetMembers(bool isWebUser)
+        {
+            var userProfileEntity = await this.userRepository.GetUserProfiles(isWebUser);
+            return accountsMapper.Configuration.Map<IEnumerable<UsersProfilesDto>>(userProfileEntity);
         }
     }
 }
