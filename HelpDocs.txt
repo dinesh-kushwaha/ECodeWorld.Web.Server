@@ -157,3 +157,7 @@ then
 [git commit -am "Remove ignored files"]
 
 However this ignore my scripts folder which I included later into repository.
+
+
+update PostCategories
+set [Icon] =LOWER(REPLACE(LTRIM(RTRIM(Category)), ' ', ''))+'.png'

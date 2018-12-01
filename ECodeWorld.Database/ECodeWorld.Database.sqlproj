@@ -133,6 +133,11 @@
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.UsersPolicies.Table.sql" />
     <Build Include="dbo\Tables\Users\GroupsRoles.sql" />
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.GroupsRoles.Table.sql" />
+    <Build Include="dbo\Tables\Masters\ApproverTypes.sql" />
+    <Build Include="dbo\Tables\Masters\ApproverTypess_ML.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.ApproverTypes.Table.sql" />
+    <Build Include="dbo\Tables\Users\ApproverTypesUsers.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.ApproverTypesUsers.Table.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ECodeWorld.Database.refactorlog" />

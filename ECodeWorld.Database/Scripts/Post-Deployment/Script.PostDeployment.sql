@@ -26,6 +26,9 @@ Post-Deployment Script Template
  :r .\DataLoad\dbo.PostStatus.Table.sql		
  :r .\DataLoad\dbo.PostTypes.Table.sql		
  :r .\DataLoad\dbo.ComplexityLevels.Table.sql	
+ :r .\DataLoad\dbo.ApproverTypes.Table.sql	
+ :r .\DataLoad\dbo.ApproverTypesUsers.Table.sql	
+
 
  :r .\DataLoad\dbo.TempPosts.Table.sql		
 
