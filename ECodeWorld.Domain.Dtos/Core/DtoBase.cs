@@ -13,7 +13,6 @@ namespace ECodeWorld.Domain.Dtos.Core
         {
             _brokenRules = new Dictionary<string, string>();
         }
-        public List<IDto> Results { get; protected set; }
         public List<KeyValuePair<string, string>> BrokenRules { get { return this.GetBrokenRules(); } }
         private List<KeyValuePair<string, string>> GetBrokenRules()
         {

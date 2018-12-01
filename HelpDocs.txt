@@ -6,8 +6,19 @@ Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 
 Scaffold-DbContext "Server=HKHDCDEVSQL01;Database=ECodeWorldV2;Trusted_Connection=True;"Microsoft.EntityFrameworkCore.SqlServer -OutputDir ../ECodeWorld.Domain.Entities/Models
 
-private readonly string connectionString;
+
+ Scaffold-DbContext "Server=HKHDCDEVSQL01;Database=ECodeWorldV2;Trusted_Connection=True;" 
+ Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Tables ApproverTypes,ApproverTypess_ML,ApproverTypesUsers 
+ -Force
+
+
+using System;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
+
+		private readonly string connectionString;
         private readonly TimeSpan cacheTimespan;
+
         public ECodeWorldContext()
         {
         }
@@ -17,7 +28,8 @@ private readonly string connectionString;
             this.connectionString = connectionString;
             this.cacheTimespan = cacheTimespan;
         }
- protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+
+		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {

@@ -41,6 +41,10 @@ namespace ECodeWorld.Domain.CrossCutting.DIResolver
             builder.RegisterType<PostCategoryRepository>().As<IPostCategoryRepository>()
          .WithParameter("connectionString", connectionString)
       .WithParameter("cacheTimespan", cacheTimespan);
+
+            builder.RegisterType<ApproversRepository>().As<IApproversRepository>()
+        .WithParameter("connectionString", connectionString)
+     .WithParameter("cacheTimespan", cacheTimespan);
         }
     }
 }

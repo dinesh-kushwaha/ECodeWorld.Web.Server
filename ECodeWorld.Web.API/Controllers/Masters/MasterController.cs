@@ -1,6 +1,7 @@
 ﻿using ECodeWorld.Domain.Application.Services.Masters;
 using ECodeWorld.Domain.Dtos;
 using ECodeWorld.Domain.Dtos.Masters;
+using ECodeWorld.Domain.Dtos.SearchCriteriaDtos;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -17,17 +18,20 @@ namespace ECodeWorld.Web.API.Controllers.Masters
         private readonly IPostsComplexityService postsComplexityService;
         private readonly IPostsTypeService postsTypeService;
         private readonly IPostsStatusService postsStatusService;
+        private readonly IApproversService approversService;
 
         public MasterController(IPostCategoryService postCategoryService,
             IPostsComplexityService postsComplexityService,
             IPostsTypeService postsTypeService,
-            IPostsStatusService postsStatusService
+            IPostsStatusService postsStatusService,
+            IApproversService approversService
             )
         {
             this.postCategoryService = postCategoryService;
             this.postsComplexityService = postsComplexityService;
             this.postsTypeService = postsTypeService;
             this.postsStatusService = postsStatusService;
+            this.approversService = approversService;
         }
 
         [HttpGet("PostCategories")]
@@ -76,6 +80,23 @@ namespace ECodeWorld.Web.API.Controllers.Masters
         public async Task<PostStatusDto> GetPostStatus(int postStatusId)
         {
             return await this.postsStatusService.GetPostStatus(postStatusId);
+        }
+
+        [HttpGet("GetApprovers")]
+        public async Task<IEnumerable<ApproversMembersDto>> GetApprovers([FromQuery]ApproversMembersSCDto searchCriteriaDto)
+        {
+            return await this.approversService.GetApprovers(searchCriteriaDto);
+        }
+        [HttpGet("GetApproverTypes")]
+        public async Task<IEnumerable<ApproverTypesDto>> GetApproversTypes([FromQuery]SearchCriteriaDto searchCriteriaDto)
+        {
+            return await this.approversService.GetApproverTypes(searchCriteriaDto);
+        }
+
+        [HttpGet("GetApproverType")]
+        public async Task<ApproverTypesDto> GetApproversTypes(int approverTypeId)
+        {
+            return await this.approversService.GetApproverType(approverTypeId);
         }
     }
 }

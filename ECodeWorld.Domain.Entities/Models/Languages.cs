@@ -7,6 +7,7 @@ namespace ECodeWorld.Domain.Entities.Models
     {
         public Languages()
         {
+            ApproverTypessMl = new HashSet<ApproverTypessMl>();
             CitiesMl = new HashSet<CitiesMl>();
             CommentsMl = new HashSet<CommentsMl>();
             ComplexityLevelsMl = new HashSet<ComplexityLevelsMl>();
@@ -28,6 +29,7 @@ namespace ECodeWorld.Domain.Entities.Models
         public DateTime Date { get; set; }
         public byte[] Timestamp { get; set; }
 
+        public ICollection<ApproverTypessMl> ApproverTypessMl { get; set; }
         public ICollection<CitiesMl> CitiesMl { get; set; }
         public ICollection<CommentsMl> CommentsMl { get; set; }
         public ICollection<ComplexityLevelsMl> ComplexityLevelsMl { get; set; }

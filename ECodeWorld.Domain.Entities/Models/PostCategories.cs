@@ -7,6 +7,7 @@ namespace ECodeWorld.Domain.Entities.Models
     {
         public PostCategories()
         {
+            ApproverTypesUsers = new HashSet<ApproverTypesUsers>();
             PostCategoriesMl = new HashSet<PostCategoriesMl>();
             Posts = new HashSet<Posts>();
             TempPosts = new HashSet<TempPosts>();
@@ -15,10 +16,12 @@ namespace ECodeWorld.Domain.Entities.Models
         public int Id { get; set; }
         public string Category { get; set; }
         public string Description { get; set; }
+        public string Icon { get; set; }
         public int Status { get; set; }
         public DateTime Date { get; set; }
         public byte[] Timestamp { get; set; }
 
+        public ICollection<ApproverTypesUsers> ApproverTypesUsers { get; set; }
         public ICollection<PostCategoriesMl> PostCategoriesMl { get; set; }
         public ICollection<Posts> Posts { get; set; }
         public ICollection<TempPosts> TempPosts { get; set; }

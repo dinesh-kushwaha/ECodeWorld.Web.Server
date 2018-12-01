@@ -21,6 +21,7 @@ namespace ECodeWorld.Domain.CrossCutting.DIResolver
             builder.RegisterType<PostsComplexityService>().As<IPostsComplexityService>();
             builder.RegisterType<PostsStatusService>().As<IPostsStatusService>();
             builder.RegisterType<PostsTypeService>().As<IPostsTypeService>();
+            builder.RegisterType<ApproversService>().As<IApproversService>();
         }
        
     }

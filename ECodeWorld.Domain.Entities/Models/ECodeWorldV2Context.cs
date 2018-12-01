@@ -8,6 +8,7 @@ namespace ECodeWorld.Domain.Entities.Models
     {
         private readonly string connectionString;
         private readonly TimeSpan cacheTimespan;
+
         public ECodeWorldContext()
         {
         }
@@ -23,6 +24,9 @@ namespace ECodeWorld.Domain.Entities.Models
         {
         }
 
+        public virtual DbSet<ApproverTypes> ApproverTypes { get; set; }
+        public virtual DbSet<ApproverTypessMl> ApproverTypessMl { get; set; }
+        public virtual DbSet<ApproverTypesUsers> ApproverTypesUsers { get; set; }
         public virtual DbSet<Certifications> Certifications { get; set; }
         public virtual DbSet<Cities> Cities { get; set; }
         public virtual DbSet<CitiesMl> CitiesMl { get; set; }
@@ -80,6 +84,112 @@ namespace ECodeWorld.Domain.Entities.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<ApproverTypes>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+            });
+
+            modelBuilder.Entity<ApproverTypessMl>(entity =>
+            {
+                entity.ToTable("ApproverTypess_ML");
+
+                entity.HasIndex(e => e.Name)
+                    .HasName("UC_ApproverTypess_ML")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.ApproverTypesId, e.LanguageId })
+                    .HasName("FK_ApproverTypess_MLLanguagesUnique")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ApproverTypesId).HasColumnName("ApproverTypesID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+
+                entity.Property(e => e.Name)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.HasOne(d => d.ApproverTypes)
+                    .WithMany(p => p.ApproverTypessMl)
+                    .HasForeignKey(d => d.ApproverTypesId)
+                    .HasConstraintName("FK_ApproverTypes_ApproverTypess_ML");
+
+                entity.HasOne(d => d.Language)
+                    .WithMany(p => p.ApproverTypessMl)
+                    .HasForeignKey(d => d.LanguageId)
+                    .HasConstraintName("FK_ApproverTypess_MLLanguages");
+            });
+
+            modelBuilder.Entity<ApproverTypesUsers>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.ApproverTypesId).HasColumnName("ApproverTypesID");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.PostCategoriesId).HasColumnName("PostCategoriesID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.UsersId)
+                    .HasColumnName("UsersID")
+                    .HasDefaultValueSql("((1))");
+
+                entity.HasOne(d => d.ApproverTypes)
+                    .WithMany(p => p.ApproverTypesUsers)
+                    .HasForeignKey(d => d.ApproverTypesId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_ApproverTypes");
+
+                entity.HasOne(d => d.PostCategories)
+                    .WithMany(p => p.ApproverTypesUsers)
+                    .HasForeignKey(d => d.PostCategoriesId)
+                    .HasConstraintName("FK_PostCategories");
+
+                entity.HasOne(d => d.Users)
+                    .WithMany(p => p.ApproverTypesUsers)
+                    .HasForeignKey(d => d.UsersId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UsersApproverTypesUsers");
+            });
+
             modelBuilder.Entity<Certifications>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -679,6 +789,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasDefaultValueSql("(getdate())");
 
                 entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Icon)
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
@@ -1288,6 +1402,7 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.PostTypesId).HasColumnName("PostTypesID");
 
                 entity.Property(e => e.PostUrl)
+                    .IsRequired()
                     .HasMaxLength(255)
                     .IsUnicode(false);
 
@@ -1408,6 +1523,10 @@ namespace ECodeWorld.Domain.Entities.Models
                 entity.Property(e => e.FirstName)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.IsWebUser)
+                    .IsRequired()
+                    .HasDefaultValueSql("((1))");
 
                 entity.Property(e => e.LastName)
                     .HasMaxLength(50)
@@ -1577,6 +1696,10 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasMaxLength(500)
                     .IsUnicode(false);
 
+                entity.Property(e => e.CompanyName)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.Date)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
@@ -1594,6 +1717,11 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsUnicode(false);
 
                 entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.HighestQualification)
                     .HasMaxLength(50)
                     .IsUnicode(false);
 
@@ -1611,6 +1739,10 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.Logo)
                     .HasMaxLength(500)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.MiddleName)
+                    .HasMaxLength(50)
                     .IsUnicode(false);
 
                 entity.Property(e => e.Mobile)
