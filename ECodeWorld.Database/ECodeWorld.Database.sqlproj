@@ -89,27 +89,27 @@
     <Build Include="dbo\Tables\Masters\ZipCodes.sql" />
     <Build Include="dbo\Tables\Posts\PostsImages.sql" />
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.Logins.Table.sql" />
-    <None Include="Scripts\Post-Deployment\DataLoad\dbo.PostCategories.Table.sql" />
-    <None Include="Scripts\Post-Deployment\DataLoad\dbo.PostStatus.Table.sql" />
-    <None Include="Scripts\Post-Deployment\DataLoad\dbo.PostTypes.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.PostsCategories.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.PostsStatus.Table.sql" />
+    <None Include="Scripts\Post-Deployment\DataLoad\dbo.PostsTypes.Table.sql" />
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.Users.Table.sql" />
     <Build Include="dbo\Tables\Posts\TempPosts.sql" />
     <Build Include="dbo\Tables\Posts\TempPosts_ML.sql" />
     <Build Include="dbo\Tables\Posts\Posts_ML.sql" />
-    <Build Include="dbo\Tables\Masters\PostStatus.sql" />
-    <Build Include="dbo\Tables\Masters\PostTypes.sql" />
-    <Build Include="dbo\Tables\Masters\PostCategories.sql" />
+    <Build Include="dbo\Tables\Masters\PostsStatus.sql" />
+    <Build Include="dbo\Tables\Masters\PostsTypes.sql" />
+    <Build Include="dbo\Tables\Masters\PostsCategories.sql" />
     <Build Include="dbo\Tables\Masters\ComplexityLevels.sql" />
     <Build Include="dbo\Tables\Masters\Languages.sql" />
-    <Build Include="dbo\Tables\Masters\PostCategories_ML.sql" />
-    <Build Include="dbo\Tables\Masters\PostStatus_ML.sql" />
-    <Build Include="dbo\Tables\Masters\PostTypes_ML.sql" />
+    <Build Include="dbo\Tables\Masters\PostsCategories_ML.sql" />
+    <Build Include="dbo\Tables\Masters\PostsStatus_ML.sql" />
+    <Build Include="dbo\Tables\Masters\PostsTypes_ML.sql" />
     <Build Include="dbo\Tables\Masters\ComplexityLevels_ML.sql" />
     <Build Include="dbo\Tables\Masters\Countries_ML.sql" />
     <Build Include="dbo\Tables\Masters\States_ML.sql" />
     <Build Include="dbo\Tables\Masters\Cities_ML.sql" />
-    <Build Include="dbo\Tables\Posts\PostReviewers.sql" />
-    <Build Include="dbo\Tables\Posts\PostReviewers_ML.sql" />
+    <Build Include="dbo\Tables\Posts\PostsReviewers.sql" />
+    <Build Include="dbo\Tables\Posts\PostsReviewers_ML.sql" />
     <Build Include="dbo\Tables\Posts\Comments_ML.sql" />
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.TempPosts.Table.sql" />
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.UserProfiles.Table.sql" />
@@ -138,6 +138,8 @@
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.ApproverTypes.Table.sql" />
     <Build Include="dbo\Tables\Users\ApproverTypesUsers.sql" />
     <None Include="Scripts\Post-Deployment\DataLoad\dbo.ApproverTypesUsers.Table.sql" />
+    <Build Include="dbo\Tables\Posts\PostsApprovals.sql" />
+    <Build Include="dbo\Tables\Posts\PostsApprovals_ML.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="ECodeWorld.Database.refactorlog" />

@@ -26,6 +26,10 @@ namespace ECodeWorld.Domain.CrossCutting.DIResolver
                .WithParameter("connectionString", connectionString)
             .WithParameter("cacheTimespan", cacheTimespan);
 
+            builder.RegisterType<TempPostsRepository>().As<ITempPostsRepository>()
+              .WithParameter("connectionString", connectionString)
+           .WithParameter("cacheTimespan", cacheTimespan);
+
             builder.RegisterType<PostsTypeRepository>().As<IPostsTypeRepository>()
               .WithParameter("connectionString", connectionString)
            .WithParameter("cacheTimespan", cacheTimespan);

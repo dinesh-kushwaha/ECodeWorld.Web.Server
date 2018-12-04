@@ -145,7 +145,7 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.Posts
             {
                 return await eCodeWorldContext.TempPosts.
                     OrderByDescending(p => p.Id).
-                    Where(p => p.AuthorId == searchCriteria.UserId).
+                    //Where(p => p.AuthorId == searchCriteria.UserId).
                     Select(x => new M.TempPosts
                     {
                         Id = x.Id,
@@ -159,7 +159,7 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.Posts
             {
                 return await eCodeWorldContext.TempPosts.
                     OrderByDescending(p => p.Id).
-                    Where(p => p.AuthorId == searchCriteria.UserId).
+                   // Where(p => p.AuthorId == searchCriteria.UserId).
                     Skip(searchCriteria.PageSize * (searchCriteria.PageNumber - 1)).
                     Take(searchCriteria.PageSize).
                      Select(x => new M.TempPosts

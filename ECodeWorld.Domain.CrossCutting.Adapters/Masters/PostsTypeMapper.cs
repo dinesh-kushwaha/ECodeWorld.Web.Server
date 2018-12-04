@@ -12,8 +12,8 @@ namespace ECodeWorld.Domain.CrossCutting.Adapters.Masters
             {
                 return new MapperConfiguration(cfg =>
                 {
-                    cfg.CreateMap<PostTypesDto, PostTypes>();
-                    cfg.CreateMap<PostTypes, PostTypesDto>();
+                    cfg.CreateMap<PostsTypesDto, PostTypes>();
+                    cfg.CreateMap<PostTypes, PostsTypesDto>();
                 }).CreateMapper();
             }
         }

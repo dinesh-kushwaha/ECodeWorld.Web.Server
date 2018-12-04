@@ -1,8 +1,7 @@
 pfx signin password  = > ecodeworld
 
 
-Scaffold-DbContext "Server=HKHDCDEVSQL01;Database=ECodeWorldV2;Trusted_Connection=True;" 
-Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
+Scaffold-DbContext "Server=HKHDCDEVSQL01;Database=ECodeWorldV2;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
 
 Scaffold-DbContext "Server=HKHDCDEVSQL01;Database=ECodeWorldV2;Trusted_Connection=True;"Microsoft.EntityFrameworkCore.SqlServer -OutputDir ../ECodeWorld.Domain.Entities/Models
 

@@ -16,9 +16,9 @@ namespace ECodeWorld.Domain.CrossCutting.DIResolver
             builder.RegisterType<U.AuthMapper>().As<U.IAuthMapper>();
 
             builder.RegisterType<PostsTypeMapper>().As<IPostsTypeMapper>();
-            builder.RegisterType<PostStatusMapper>().As<IPostStatusMapper>();
+            builder.RegisterType<PostsStatusMapper>().As<IPostsStatusMapper>();
             builder.RegisterType<PostsComplexityMapper>().As<IPostsComplexityMapper>();
-            builder.RegisterType<PostCategoryMapper>().As<IPostCategoryMapper>();
+            builder.RegisterType<PostsCategoryMapper>().As<IPostsCategoryMapper>();
             builder.RegisterType<ApproversMapper>().As<IApproversMapper>();
         }
     }

@@ -18,7 +18,6 @@ namespace ECodeWorld.Domain.Entities.Models
             this.connectionString = connectionString;
             this.cacheTimespan = cacheTimespan;
         }
-
         public ECodeWorldContext(DbContextOptions<ECodeWorldContext> options)
             : base(options)
         {
@@ -45,17 +44,19 @@ namespace ECodeWorld.Domain.Entities.Models
         public virtual DbSet<Logins> Logins { get; set; }
         public virtual DbSet<Permissions> Permissions { get; set; }
         public virtual DbSet<Policies> Policies { get; set; }
-        public virtual DbSet<PostCategories> PostCategories { get; set; }
-        public virtual DbSet<PostCategoriesMl> PostCategoriesMl { get; set; }
-        public virtual DbSet<PostReviewers> PostReviewers { get; set; }
-        public virtual DbSet<PostReviewersMl> PostReviewersMl { get; set; }
         public virtual DbSet<Posts> Posts { get; set; }
+        public virtual DbSet<PostsApprovals> PostsApprovals { get; set; }
+        public virtual DbSet<PostsApprovalsMl> PostsApprovalsMl { get; set; }
+        public virtual DbSet<PostsCategories> PostsCategories { get; set; }
+        public virtual DbSet<PostsCategoriesMl> PostsCategoriesMl { get; set; }
         public virtual DbSet<PostsImages> PostsImages { get; set; }
         public virtual DbSet<PostsMl> PostsMl { get; set; }
-        public virtual DbSet<PostStatus> PostStatus { get; set; }
-        public virtual DbSet<PostStatusMl> PostStatusMl { get; set; }
-        public virtual DbSet<PostTypes> PostTypes { get; set; }
-        public virtual DbSet<PostTypesMl> PostTypesMl { get; set; }
+        public virtual DbSet<PostsReviewers> PostsReviewers { get; set; }
+        public virtual DbSet<PostsReviewersMl> PostsReviewersMl { get; set; }
+        public virtual DbSet<PostsStatus> PostsStatus { get; set; }
+        public virtual DbSet<PostsStatusMl> PostsStatusMl { get; set; }
+        public virtual DbSet<PostsTypes> PostsTypes { get; set; }
+        public virtual DbSet<PostsTypesMl> PostsTypesMl { get; set; }
         public virtual DbSet<Qualifications> Qualifications { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<RolesPermissions> RolesPermissions { get; set; }
@@ -771,169 +772,6 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasConstraintName("FK_PoliciesPermissions");
             });
 
-            modelBuilder.Entity<PostCategories>(entity =>
-            {
-                entity.HasIndex(e => e.Category)
-                    .HasName("UC_PostCategories")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Category)
-                    .IsRequired()
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Description)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Icon)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Timestamp)
-                    .IsRequired()
-                    .IsRowVersion();
-            });
-
-            modelBuilder.Entity<PostCategoriesMl>(entity =>
-            {
-                entity.ToTable("PostCategories_ML");
-
-                entity.HasIndex(e => e.Category)
-                    .HasName("UC_PostCategories_ML")
-                    .IsUnique();
-
-                entity.HasIndex(e => new { e.PostCategoriesId, e.LanguageId })
-                    .HasName("UC_UniquePostCategoryLanguage")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Category)
-                    .IsRequired()
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Description)
-                    .HasMaxLength(255)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
-
-                entity.Property(e => e.PostCategoriesId).HasColumnName("PostCategoriesID");
-
-                entity.Property(e => e.Timestamp)
-                    .IsRequired()
-                    .IsRowVersion();
-
-                entity.HasOne(d => d.Language)
-                    .WithMany(p => p.PostCategoriesMl)
-                    .HasForeignKey(d => d.LanguageId)
-                    .HasConstraintName("FK_PostCategories_MLLanguages");
-
-                entity.HasOne(d => d.PostCategories)
-                    .WithMany(p => p.PostCategoriesMl)
-                    .HasForeignKey(d => d.PostCategoriesId)
-                    .HasConstraintName("FK_TempPosts_MLPostCategories");
-            });
-
-            modelBuilder.Entity<PostReviewers>(entity =>
-            {
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.AssignedDate)
-                    .HasColumnType("date")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.Comments)
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.CompletionDate).HasColumnType("date");
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.DoneDate).HasColumnType("date");
-
-                entity.Property(e => e.Messages)
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.TempPostsId).HasColumnName("TempPostsID");
-
-                entity.Property(e => e.Timestamp)
-                    .IsRequired()
-                    .IsRowVersion();
-
-                entity.Property(e => e.UsersId).HasColumnName("UsersID");
-
-                entity.HasOne(d => d.TempPosts)
-                    .WithMany(p => p.PostReviewers)
-                    .HasForeignKey(d => d.TempPostsId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PostReviewersTempPosts");
-
-                entity.HasOne(d => d.Users)
-                    .WithMany(p => p.PostReviewers)
-                    .HasForeignKey(d => d.UsersId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PostReviewersUsers");
-            });
-
-            modelBuilder.Entity<PostReviewersMl>(entity =>
-            {
-                entity.ToTable("PostReviewers_ML");
-
-                entity.HasIndex(e => new { e.PostReviewsId, e.LanguageId })
-                    .HasName("UC_PostReviews_MLLanguage")
-                    .IsUnique();
-
-                entity.Property(e => e.Id).HasColumnName("ID");
-
-                entity.Property(e => e.Comments)
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("datetime")
-                    .HasDefaultValueSql("(getdate())");
-
-                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
-
-                entity.Property(e => e.Messages)
-                    .HasMaxLength(1000)
-                    .IsUnicode(false);
-
-                entity.Property(e => e.PostReviewsId).HasColumnName("PostReviewsID");
-
-                entity.Property(e => e.Timestamp)
-                    .IsRequired()
-                    .IsRowVersion();
-
-                entity.HasOne(d => d.Language)
-                    .WithMany(p => p.PostReviewersMl)
-                    .HasForeignKey(d => d.LanguageId)
-                    .HasConstraintName("FK_PostReviews_MLLanguages");
-
-                entity.HasOne(d => d.PostReviews)
-                    .WithMany(p => p.PostReviewersMl)
-                    .HasForeignKey(d => d.PostReviewsId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_PostReviews_MLPostReviews");
-            });
-
             modelBuilder.Entity<Posts>(entity =>
             {
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -998,6 +836,169 @@ namespace ECodeWorld.Domain.Entities.Models
                     .WithMany(p => p.Posts)
                     .HasForeignKey(d => d.PostTypesId)
                     .HasConstraintName("FK_PostsPostTypes");
+            });
+
+            modelBuilder.Entity<PostsApprovals>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AssignedDate)
+                    .HasColumnType("date")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CompletionDate).HasColumnType("date");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DoneDate).HasColumnType("date");
+
+                entity.Property(e => e.Messages)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TempPostsId).HasColumnName("TempPostsID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.UsersId).HasColumnName("UsersID");
+
+                entity.HasOne(d => d.TempPosts)
+                    .WithMany(p => p.PostsApprovals)
+                    .HasForeignKey(d => d.TempPostsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PostsApprovalsTempPosts");
+
+                entity.HasOne(d => d.Users)
+                    .WithMany(p => p.PostsApprovals)
+                    .HasForeignKey(d => d.UsersId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PostsApprovalsUsers");
+            });
+
+            modelBuilder.Entity<PostsApprovalsMl>(entity =>
+            {
+                entity.ToTable("PostsApprovals_ML");
+
+                entity.HasIndex(e => new { e.PostsApprovalsId, e.LanguageId })
+                    .HasName("UC_PostsApprovals_MLLanguage")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+
+                entity.Property(e => e.Messages)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PostsApprovalsId).HasColumnName("PostsApprovalsID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.HasOne(d => d.Language)
+                    .WithMany(p => p.PostsApprovalsMl)
+                    .HasForeignKey(d => d.LanguageId)
+                    .HasConstraintName("FK_PostsApprovals_MLLanguages");
+
+                entity.HasOne(d => d.PostsApprovals)
+                    .WithMany(p => p.PostsApprovalsMl)
+                    .HasForeignKey(d => d.PostsApprovalsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PostsApprovals_MLPostReviews");
+            });
+
+            modelBuilder.Entity<PostsCategories>(entity =>
+            {
+                entity.HasIndex(e => e.Category)
+                    .HasName("UC_PostsCategories")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Category)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Icon)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+            });
+
+            modelBuilder.Entity<PostsCategoriesMl>(entity =>
+            {
+                entity.ToTable("PostsCategories_ML");
+
+                entity.HasIndex(e => e.Category)
+                    .HasName("UC_PostsCategories_ML")
+                    .IsUnique();
+
+                entity.HasIndex(e => new { e.PostsCategoriesId, e.LanguageId })
+                    .HasName("UC_UniquePostsCategories_MLLanguage")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Category)
+                    .IsRequired()
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Description)
+                    .HasMaxLength(255)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+
+                entity.Property(e => e.PostsCategoriesId).HasColumnName("PostsCategoriesID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.HasOne(d => d.Language)
+                    .WithMany(p => p.PostsCategoriesMl)
+                    .HasForeignKey(d => d.LanguageId)
+                    .HasConstraintName("FK_PostsCategories_MLLanguages");
+
+                entity.HasOne(d => d.PostsCategories)
+                    .WithMany(p => p.PostsCategoriesMl)
+                    .HasForeignKey(d => d.PostsCategoriesId)
+                    .HasConstraintName("FK_TempPosts_MLPostsCategories_ML");
             });
 
             modelBuilder.Entity<PostsImages>(entity =>
@@ -1067,10 +1068,103 @@ namespace ECodeWorld.Domain.Entities.Models
                     .HasConstraintName("FK_Posts_MLPosts");
             });
 
-            modelBuilder.Entity<PostStatus>(entity =>
+            modelBuilder.Entity<PostsReviewers>(entity =>
+            {
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.AssignedDate)
+                    .HasColumnType("date")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.CompletionDate).HasColumnType("date");
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.DoneDate).HasColumnType("date");
+
+                entity.Property(e => e.Messages)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.TempPostsId).HasColumnName("TempPostsID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.Property(e => e.UsersId).HasColumnName("UsersID");
+
+                entity.HasOne(d => d.ApproverTypes)
+                    .WithMany(p => p.PostsReviewers)
+                    .HasForeignKey(d => d.ApproverTypesId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PostReviewersApproverTypes");
+
+                entity.HasOne(d => d.TempPosts)
+                    .WithMany(p => p.PostsReviewers)
+                    .HasForeignKey(d => d.TempPostsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PostReviewersTempPosts");
+
+                entity.HasOne(d => d.Users)
+                    .WithMany(p => p.PostsReviewers)
+                    .HasForeignKey(d => d.UsersId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PostReviewersUsers");
+            });
+
+            modelBuilder.Entity<PostsReviewersMl>(entity =>
+            {
+                entity.ToTable("PostsReviewers_ML");
+
+                entity.HasIndex(e => new { e.PostsReviewsId, e.LanguageId })
+                    .HasName("UC_PostReviews_MLLanguage")
+                    .IsUnique();
+
+                entity.Property(e => e.Id).HasColumnName("ID");
+
+                entity.Property(e => e.Comments)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Date)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
+
+                entity.Property(e => e.Messages)
+                    .HasMaxLength(1000)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.PostsReviewsId).HasColumnName("PostsReviewsID");
+
+                entity.Property(e => e.Timestamp)
+                    .IsRequired()
+                    .IsRowVersion();
+
+                entity.HasOne(d => d.Language)
+                    .WithMany(p => p.PostsReviewersMl)
+                    .HasForeignKey(d => d.LanguageId)
+                    .HasConstraintName("FK_PostReviews_MLLanguages");
+
+                entity.HasOne(d => d.PostsReviews)
+                    .WithMany(p => p.PostsReviewersMl)
+                    .HasForeignKey(d => d.PostsReviewsId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_PostsReviewers_MLPostReviews");
+            });
+
+            modelBuilder.Entity<PostsStatus>(entity =>
             {
                 entity.HasIndex(e => e.Pstatus)
-                    .HasName("UC_PostStatus")
+                    .HasName("UC_PostsStatus")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -1094,15 +1188,15 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsRowVersion();
             });
 
-            modelBuilder.Entity<PostStatusMl>(entity =>
+            modelBuilder.Entity<PostsStatusMl>(entity =>
             {
-                entity.ToTable("PostStatus_ML");
+                entity.ToTable("PostsStatus_ML");
 
                 entity.HasIndex(e => e.Pstatus)
                     .HasName("UC_PostStatus_ML")
                     .IsUnique();
 
-                entity.HasIndex(e => new { e.PostStatusId, e.LanguageId })
+                entity.HasIndex(e => new { e.PostsStatusId, e.LanguageId })
                     .HasName("UC_UniquePostStatusLanguage")
                     .IsUnique();
 
@@ -1118,7 +1212,7 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
-                entity.Property(e => e.PostStatusId).HasColumnName("PostStatusID");
+                entity.Property(e => e.PostsStatusId).HasColumnName("PostsStatusID");
 
                 entity.Property(e => e.Pstatus)
                     .IsRequired()
@@ -1131,20 +1225,20 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsRowVersion();
 
                 entity.HasOne(d => d.Language)
-                    .WithMany(p => p.PostStatusMl)
+                    .WithMany(p => p.PostsStatusMl)
                     .HasForeignKey(d => d.LanguageId)
-                    .HasConstraintName("FK_PostStatus_MLLanguages");
+                    .HasConstraintName("FK_PostsStatus_MLLanguages");
 
-                entity.HasOne(d => d.PostStatus)
-                    .WithMany(p => p.PostStatusMl)
-                    .HasForeignKey(d => d.PostStatusId)
-                    .HasConstraintName("FK_TempPosts_MLPostStatus");
+                entity.HasOne(d => d.PostsStatus)
+                    .WithMany(p => p.PostsStatusMl)
+                    .HasForeignKey(d => d.PostsStatusId)
+                    .HasConstraintName("FK_TempPosts_MLPostsStatus_ML");
             });
 
-            modelBuilder.Entity<PostTypes>(entity =>
+            modelBuilder.Entity<PostsTypes>(entity =>
             {
                 entity.HasIndex(e => e.Ptype)
-                    .HasName("UC_PostTypes")
+                    .HasName("UC_PostsTypes")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -1168,16 +1262,16 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsRowVersion();
             });
 
-            modelBuilder.Entity<PostTypesMl>(entity =>
+            modelBuilder.Entity<PostsTypesMl>(entity =>
             {
-                entity.ToTable("PostTypes_ML");
+                entity.ToTable("PostsTypes_ML");
 
                 entity.HasIndex(e => e.Ptype)
-                    .HasName("UC_PostTypes_ML")
+                    .HasName("UC_PostsTypes_ML")
                     .IsUnique();
 
-                entity.HasIndex(e => new { e.PostTypesId, e.LanguageId })
-                    .HasName("UC_UniquePostTypesLanguage")
+                entity.HasIndex(e => new { e.PostsTypesId, e.LanguageId })
+                    .HasName("UC_UniquePostsTypesLanguage")
                     .IsUnique();
 
                 entity.Property(e => e.Id).HasColumnName("ID");
@@ -1192,7 +1286,7 @@ namespace ECodeWorld.Domain.Entities.Models
 
                 entity.Property(e => e.LanguageId).HasColumnName("LanguageID");
 
-                entity.Property(e => e.PostTypesId).HasColumnName("PostTypesID");
+                entity.Property(e => e.PostsTypesId).HasColumnName("PostsTypesID");
 
                 entity.Property(e => e.Ptype)
                     .IsRequired()
@@ -1205,14 +1299,14 @@ namespace ECodeWorld.Domain.Entities.Models
                     .IsRowVersion();
 
                 entity.HasOne(d => d.Language)
-                    .WithMany(p => p.PostTypesMl)
+                    .WithMany(p => p.PostsTypesMl)
                     .HasForeignKey(d => d.LanguageId)
-                    .HasConstraintName("FK_PostTypes_MLLanguages");
+                    .HasConstraintName("FK_PostsTypes_MLLanguages");
 
-                entity.HasOne(d => d.PostTypes)
-                    .WithMany(p => p.PostTypesMl)
-                    .HasForeignKey(d => d.PostTypesId)
-                    .HasConstraintName("FK_PostTypes_MLPostStatus");
+                entity.HasOne(d => d.PostsTypes)
+                    .WithMany(p => p.PostsTypesMl)
+                    .HasForeignKey(d => d.PostsTypesId)
+                    .HasConstraintName("FK_PostTypes_MLPostsStatus");
             });
 
             modelBuilder.Entity<Qualifications>(entity =>

@@ -18,25 +18,25 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.Masters
         {
             eCodeWorldContext = new ECodeWorldContext(connectionString, cacheTimespan);
         }
-        public async Task<PostTypes> GetPostType(int postTypesId)
+        public async Task<PostsTypes> GetPostType(int postTypesId)
         {
-            return await eCodeWorldContext.PostTypes.FirstOrDefaultAsync(p => p.Id == postTypesId);
+            return await eCodeWorldContext.PostsTypes.FirstOrDefaultAsync(p => p.Id == postTypesId);
         }
 
-        public async Task<IEnumerable<PostTypes>> GetPostTypes(SearchCriteria searchCriteria)
+        public async Task<IEnumerable<PostsTypes>> GetPostTypes(SearchCriteria searchCriteria)
         {
             if (searchCriteria == null)
                 return null;
             if (searchCriteria.IsOrderByDescending)
             {
-                return await eCodeWorldContext.PostTypes.
+                return await eCodeWorldContext.PostsTypes.
                        OrderByDescending(p => p.Id).
                        Skip(searchCriteria.PageSize * (searchCriteria.PageNumber - 1)).
                        Take(searchCriteria.PageSize).ToListAsync();
             }
             else
             {
-                return await eCodeWorldContext.PostTypes.
+                return await eCodeWorldContext.PostsTypes.
                        Skip(searchCriteria.PageSize * (searchCriteria.PageNumber - 1)).
                        Take(searchCriteria.PageSize).ToListAsync();
             }

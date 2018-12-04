@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using M = ECodeWorld.Domain.Entities.Models;
+using ECodeWorld.Domain.Entities.Models;
 
 namespace ECodeWorld.Domain.Infrastructure.Repositories.Masters
 {
     public interface IPostsTypeRepository
     {
-        Task<M.PostTypes> GetPostType(int postTypesId);
-        Task<IEnumerable<M.PostTypes>> GetPostTypes(SearchCriteria searchCriteria);
+        Task<PostsTypes> GetPostType(int postTypesId);
+        Task<IEnumerable<PostsTypes>> GetPostTypes(SearchCriteria searchCriteria);
     }
 }

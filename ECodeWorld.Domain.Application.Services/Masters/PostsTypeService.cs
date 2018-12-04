@@ -17,17 +17,17 @@ namespace ECodeWorld.Domain.Application.Services.Masters
             this.postsTypeRepository = postsTypeRepository;
             this.postsTypeMapper = postsTypeMapper;
         }
-        public async Task<PostTypesDto> GetPostType(int postTypesId)
+        public async Task<PostsTypesDto> GetPostType(int postTypesId)
         {
             var entity = await this.postsTypeRepository.GetPostType(postTypesId);
-            return this.postsTypeMapper.Configuration.Map<PostTypesDto>(entity);
+            return this.postsTypeMapper.Configuration.Map<PostsTypesDto>(entity);
         }
 
-        public async Task<IEnumerable<PostTypesDto>> GetPostTypes(SearchCriteriaDto searchCriteriaDto)
+        public async Task<IEnumerable<PostsTypesDto>> GetPostTypes(SearchCriteriaDto searchCriteriaDto)
         {
             var searchCriteria = this.postsTypeMapper.Configuration.Map<SearchCriteria>(searchCriteriaDto);
             var entities = await this.postsTypeRepository.GetPostTypes(searchCriteria);
-            return this.postsTypeMapper.Configuration.Map<IEnumerable<PostTypesDto>>(entities);
+            return this.postsTypeMapper.Configuration.Map<IEnumerable<PostsTypesDto>>(entities);
         }
     }
 }

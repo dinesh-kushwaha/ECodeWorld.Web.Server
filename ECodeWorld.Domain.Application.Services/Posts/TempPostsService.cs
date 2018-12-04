@@ -3,6 +3,7 @@ using ECodeWorld.Domain.Dtos;
 using ECodeWorld.Domain.Dtos.Core;
 using ECodeWorld.Domain.Dtos.Message;
 using ECodeWorld.Domain.Dtos.Posts;
+using ECodeWorld.Domain.Entities.Models;
 using ECodeWorld.Domain.Infrastructure.Repositories;
 using ECodeWorld.Domain.Infrastructure.Repositories.Posts;
 using ECodeWorld.Domain.Infrastructure.Repositories.User;
@@ -10,7 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
-using M = ECodeWorld.Domain.Entities.Models;
+
 
 namespace ECodeWorld.Domain.Application.Services.Posts
 {
@@ -19,14 +20,17 @@ namespace ECodeWorld.Domain.Application.Services.Posts
         private readonly IPostsRepository postRepository;
         private readonly IUserRepository userRepository;
         private readonly ITempPostsMapper tempPostsMapper;
-        
+        private readonly ITempPostsRepository tempPostsRepository;
+
         public TempPostsService(IPostsRepository postRepository,
             IUserRepository userRepository,
-            ITempPostsMapper tempPostsMapper)
+            ITempPostsMapper tempPostsMapper,
+            ITempPostsRepository tempPostsRepository)
         {
             this.userRepository = userRepository;
             this.postRepository = postRepository;
             this.tempPostsMapper = tempPostsMapper;
+            this.tempPostsRepository = tempPostsRepository;
         }
         private string MakeUrlString(string text)
         {
@@ -48,7 +52,7 @@ namespace ECodeWorld.Domain.Application.Services.Posts
             try
             {
                 posts.PostUrl = UrlEncode(MakeUrlString(posts.Title));
-                var entity = this.tempPostsMapper.Configuration.Map<M.TempPosts>(posts);
+                var entity = this.tempPostsMapper.Configuration.Map<TempPosts>(posts);
                 var newPostId = await this.postRepository.CreateTempPost(entity);
                 if (newPostId > 0)
                 {
@@ -73,7 +77,7 @@ namespace ECodeWorld.Domain.Application.Services.Posts
 
         public async Task<ResponseDto> UpdateTempPost(int postId, TempPostsDto posts)
         {
-            var entity = this.tempPostsMapper.Configuration.Map<M.TempPosts>(posts);
+            var entity = this.tempPostsMapper.Configuration.Map<TempPosts>(posts);
             await this.postRepository.UpdateTempPost(postId, entity);
             return new ResponseDto { };
         }
@@ -103,9 +107,25 @@ namespace ECodeWorld.Domain.Application.Services.Posts
             return this.tempPostsMapper.Configuration.Map<IEnumerable<TempPostsDto>>(entities);
         }
 
-        public Task<ResponseDto> TempPostReview(PostReviewersDto postReviewersDto)
+        public Task<ResponseDto> TempPostReview(PostsReviewersDto postReviewersDto)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<PostsReviewersDto> Assign(PostsReviewersDto postsReviewersDto)
+        {
+            var postsReviewers = this.tempPostsMapper.Configuration.Map<PostsReviewers>(postsReviewersDto);
+            var modifiedId = await this.tempPostsRepository.Assign(postsReviewers);
+            var postReviewrsUpdated = await this.tempPostsRepository.GetPostsReviewer(modifiedId);
+            return this.tempPostsMapper.Configuration.Map<PostsReviewersDto>(postReviewrsUpdated);
+        }
+
+        public async Task<PostsApprovalsDto> Approve(PostsApprovalsDto postsApprovalsDto)
+        {
+            var postsApprovals = this.tempPostsMapper.Configuration.Map<PostsApprovals>(postsApprovalsDto);
+            var modifiedId = await this.tempPostsRepository.Approve(postsApprovals);
+            var postsApprovalsUpdated = await this.tempPostsRepository.GetPostsApprovals(modifiedId);
+            return this.tempPostsMapper.Configuration.Map<PostsApprovalsDto>(postsApprovalsUpdated);
         }
     }
 }

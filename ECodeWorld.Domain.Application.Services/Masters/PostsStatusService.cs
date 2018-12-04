@@ -11,24 +11,24 @@ namespace ECodeWorld.Domain.Application.Services.Masters
     public class PostsStatusService : IPostsStatusService
     {
         private readonly IPostStatusRepository postStatusRepository;
-        private readonly IPostStatusMapper postStatusMapper;
-        public PostsStatusService(IPostStatusRepository postStatusRepository, IPostStatusMapper postStatusMapper)
+        private readonly IPostsStatusMapper postStatusMapper;
+        public PostsStatusService(IPostStatusRepository postStatusRepository, IPostsStatusMapper postStatusMapper)
         {
             this.postStatusRepository = postStatusRepository;
             this.postStatusMapper = postStatusMapper;
         }
 
-        public async Task<PostStatusDto> GetPostStatus(int postStatusId)
+        public async Task<PostsStatusDto> GetPostStatus(int postStatusId)
         {
             var entity = await this.postStatusRepository.GetPostStatus(postStatusId);
-            return this.postStatusMapper.Configuration.Map<PostStatusDto>(entity);
+            return this.postStatusMapper.Configuration.Map<PostsStatusDto>(entity);
         }
 
-        public async Task<IEnumerable<PostStatusDto>> GetPostStatuss(SearchCriteriaDto searchCriteriaDto)
+        public async Task<IEnumerable<PostsStatusDto>> GetPostStatuss(SearchCriteriaDto searchCriteriaDto)
         {
             var searchCriteria = this.postStatusMapper.Configuration.Map<SearchCriteria>(searchCriteriaDto);
             var entities = await this.postStatusRepository.GetPostStatuss(searchCriteria);
-            return this.postStatusMapper.Configuration.Map<IEnumerable<PostStatusDto>>(entities);
+            return this.postStatusMapper.Configuration.Map<IEnumerable<PostsStatusDto>>(entities);
         }
     }
 }

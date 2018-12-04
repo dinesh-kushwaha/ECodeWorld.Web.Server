@@ -32,10 +32,10 @@ namespace ECodeWorld.Domain.Entities.Models
         public byte[] Timestamp { get; set; }
 
         public Users Author { get; set; }
-        public PostCategories Category { get; set; }
+        public PostsCategories Category { get; set; }
         public ComplexityLevels ComplexityLevels { get; set; }
-        public PostStatus PostStatus { get; set; }
-        public PostTypes PostTypes { get; set; }
+        public PostsStatus PostStatus { get; set; }
+        public PostsTypes PostTypes { get; set; }
         public ICollection<Comments> Comments { get; set; }
         public ICollection<LikesCounters> LikesCounters { get; set; }
         public ICollection<PostsImages> PostsImages { get; set; }

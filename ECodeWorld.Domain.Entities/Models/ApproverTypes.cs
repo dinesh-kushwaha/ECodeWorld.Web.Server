@@ -9,6 +9,7 @@ namespace ECodeWorld.Domain.Entities.Models
         {
             ApproverTypesUsers = new HashSet<ApproverTypesUsers>();
             ApproverTypessMl = new HashSet<ApproverTypessMl>();
+            PostsReviewers = new HashSet<PostsReviewers>();
         }
 
         public int Id { get; set; }
@@ -20,5 +21,6 @@ namespace ECodeWorld.Domain.Entities.Models
 
         public ICollection<ApproverTypesUsers> ApproverTypesUsers { get; set; }
         public ICollection<ApproverTypessMl> ApproverTypessMl { get; set; }
+        public ICollection<PostsReviewers> PostsReviewers { get; set; }
     }
 }

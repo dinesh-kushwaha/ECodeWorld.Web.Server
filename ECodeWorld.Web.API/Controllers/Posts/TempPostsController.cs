@@ -56,5 +56,17 @@ namespace ECodeWorld.Web.API.Controllers.Posts
         {
             return await this.tempPostsService.GetTempPosts(searchCriteriaDto, userId);
         }
+
+        [HttpPut("Assign")]
+        public async Task<PostsReviewersDto> Assign(PostsReviewersDto postsReviewersDto)
+        {
+            return await this.tempPostsService.Assign(postsReviewersDto);
+        }
+
+        [HttpPut("Approve")]
+        public async Task<PostsApprovalsDto> Approve(PostsApprovalsDto postsApprovalsDto)
+        {
+            return await this.tempPostsService.Approve(postsApprovalsDto);
+        }
     }
 }

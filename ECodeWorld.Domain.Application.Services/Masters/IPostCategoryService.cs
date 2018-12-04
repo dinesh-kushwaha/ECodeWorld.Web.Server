@@ -7,7 +7,7 @@ namespace ECodeWorld.Domain.Application.Services.Masters
 {
     public interface IPostCategoryService
     {
-        Task<PostCategoriesDto> GetPostCategory(int categoryId);
-        Task<IEnumerable<PostCategoriesDto>> GetPostCategories(SearchCriteriaDto searchCriteriaDto);
+        Task<PostsCategoriesDto> GetPostCategory(int categoryId);
+        Task<IEnumerable<PostsCategoriesDto>> GetPostCategories(SearchCriteriaDto searchCriteriaDto);
     }
 }

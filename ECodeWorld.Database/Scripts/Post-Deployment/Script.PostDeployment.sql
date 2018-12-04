@@ -22,9 +22,9 @@ Post-Deployment Script Template
  :r .\DataLoad\dbo.RolesPermissions.Table.sql	
 
 --Masters Tables
- :r .\DataLoad\dbo.PostCategories.Table.sql		
- :r .\DataLoad\dbo.PostStatus.Table.sql		
- :r .\DataLoad\dbo.PostTypes.Table.sql		
+ :r .\DataLoad\dbo.PostsCategories.Table.sql		
+ :r .\DataLoad\dbo.PostsStatus.Table.sql		
+ :r .\DataLoad\dbo.PostsTypes.Table.sql		
  :r .\DataLoad\dbo.ComplexityLevels.Table.sql	
  :r .\DataLoad\dbo.ApproverTypes.Table.sql	
  :r .\DataLoad\dbo.ApproverTypesUsers.Table.sql	

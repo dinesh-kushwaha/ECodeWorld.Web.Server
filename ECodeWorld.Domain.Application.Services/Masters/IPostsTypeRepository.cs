@@ -7,7 +7,7 @@ namespace ECodeWorld.Domain.Application.Services.Masters
 {
     public interface IPostsTypeService
     {
-        Task<PostTypesDto> GetPostType(int postTypesId);
-        Task<IEnumerable<PostTypesDto>> GetPostTypes(SearchCriteriaDto searchCriteriaDto);
+        Task<PostsTypesDto> GetPostType(int postTypesId);
+        Task<IEnumerable<PostsTypesDto>> GetPostTypes(SearchCriteriaDto searchCriteriaDto);
     }
 }

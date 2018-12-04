@@ -12,11 +12,12 @@ namespace ECodeWorld.Domain.Entities.Models
             CommentsMl = new HashSet<CommentsMl>();
             ComplexityLevelsMl = new HashSet<ComplexityLevelsMl>();
             CountriesMl = new HashSet<CountriesMl>();
-            PostCategoriesMl = new HashSet<PostCategoriesMl>();
-            PostReviewersMl = new HashSet<PostReviewersMl>();
-            PostStatusMl = new HashSet<PostStatusMl>();
-            PostTypesMl = new HashSet<PostTypesMl>();
+            PostsApprovalsMl = new HashSet<PostsApprovalsMl>();
+            PostsCategoriesMl = new HashSet<PostsCategoriesMl>();
             PostsMl = new HashSet<PostsMl>();
+            PostsReviewersMl = new HashSet<PostsReviewersMl>();
+            PostsStatusMl = new HashSet<PostsStatusMl>();
+            PostsTypesMl = new HashSet<PostsTypesMl>();
             StatesMl = new HashSet<StatesMl>();
             TempPostsMl = new HashSet<TempPostsMl>();
         }
@@ -34,11 +35,12 @@ namespace ECodeWorld.Domain.Entities.Models
         public ICollection<CommentsMl> CommentsMl { get; set; }
         public ICollection<ComplexityLevelsMl> ComplexityLevelsMl { get; set; }
         public ICollection<CountriesMl> CountriesMl { get; set; }
-        public ICollection<PostCategoriesMl> PostCategoriesMl { get; set; }
-        public ICollection<PostReviewersMl> PostReviewersMl { get; set; }
-        public ICollection<PostStatusMl> PostStatusMl { get; set; }
-        public ICollection<PostTypesMl> PostTypesMl { get; set; }
+        public ICollection<PostsApprovalsMl> PostsApprovalsMl { get; set; }
+        public ICollection<PostsCategoriesMl> PostsCategoriesMl { get; set; }
         public ICollection<PostsMl> PostsMl { get; set; }
+        public ICollection<PostsReviewersMl> PostsReviewersMl { get; set; }
+        public ICollection<PostsStatusMl> PostsStatusMl { get; set; }
+        public ICollection<PostsTypesMl> PostsTypesMl { get; set; }
         public ICollection<StatesMl> StatesMl { get; set; }
         public ICollection<TempPostsMl> TempPostsMl { get; set; }
     }

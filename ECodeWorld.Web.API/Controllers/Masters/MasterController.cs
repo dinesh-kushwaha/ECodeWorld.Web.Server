@@ -35,13 +35,13 @@ namespace ECodeWorld.Web.API.Controllers.Masters
         }
 
         [HttpGet("PostCategories")]
-        public async Task<IEnumerable<PostCategoriesDto>> GetCategories([FromQuery]SearchCriteriaDto searchCriteriaDto)
+        public async Task<IEnumerable<PostsCategoriesDto>> GetCategories([FromQuery]SearchCriteriaDto searchCriteriaDto)
         {
             return await this.postCategoryService.GetPostCategories(searchCriteriaDto);
         }
 
         [HttpGet("PostCategory")]
-        public async Task<PostCategoriesDto> GetCategory(int categoryId)
+        public async Task<PostsCategoriesDto> GetCategory(int categoryId)
         {
             return await this.postCategoryService.GetPostCategory(categoryId);
         }
@@ -59,25 +59,25 @@ namespace ECodeWorld.Web.API.Controllers.Masters
         }
 
         [HttpGet("PostTypes")]
-        public async Task<IEnumerable<PostTypesDto>> GetPostTypes([FromQuery]SearchCriteriaDto searchCriteriaDto)
+        public async Task<IEnumerable<PostsTypesDto>> GetPostTypes([FromQuery]SearchCriteriaDto searchCriteriaDto)
         {
             return await this.postsTypeService.GetPostTypes(searchCriteriaDto);
         }
 
         [HttpGet("PostType")]
-        public async Task<PostTypesDto> GetPostType(int postTypeId)
+        public async Task<PostsTypesDto> GetPostType(int postTypeId)
         {
             return await this.postsTypeService.GetPostType(postTypeId);
         }
 
         [HttpGet("PostStatuss")]
-        public async Task<IEnumerable<PostStatusDto>> GetPostStatuss([FromQuery]SearchCriteriaDto searchCriteriaDto)
+        public async Task<IEnumerable<PostsStatusDto>> GetPostStatuss([FromQuery]SearchCriteriaDto searchCriteriaDto)
         {
             return await this.postsStatusService.GetPostStatuss(searchCriteriaDto);
         }
 
         [HttpGet("PostStatus")]
-        public async Task<PostStatusDto> GetPostStatus(int postStatusId)
+        public async Task<PostsStatusDto> GetPostStatus(int postStatusId)
         {
             return await this.postsStatusService.GetPostStatus(postStatusId);
         }

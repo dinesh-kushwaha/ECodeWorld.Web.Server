@@ -64,7 +64,7 @@ namespace ECodeWorld.Domain.Infrastructure.Repositories.Masters
                             join aptu in eCodeWorldContext.ApproverTypesUsers on u.Id equals aptu.UsersId
                             join apt in eCodeWorldContext.ApproverTypes on aptu.ApproverTypesId equals apt.Id into apttu
                             from apt in apttu.DefaultIfEmpty()
-                            join pc in eCodeWorldContext.PostCategories on aptu.PostCategoriesId equals pc.Id into aptupc
+                            join pc in eCodeWorldContext.PostsCategories on aptu.PostCategoriesId equals pc.Id into aptupc
                             from pc in aptupc.DefaultIfEmpty()
                             select new ApproversMembersModel
                             {

@@ -8,7 +8,7 @@ namespace ECodeWorld.Domain.Application.Services.Masters
 {
     public interface IPostsStatusService
     {
-        Task<PostStatusDto> GetPostStatus(int postStatusId);
-        Task<IEnumerable<PostStatusDto>> GetPostStatuss(SearchCriteriaDto searchCriteriaDto);
+        Task<PostsStatusDto> GetPostStatus(int postStatusId);
+        Task<IEnumerable<PostsStatusDto>> GetPostStatuss(SearchCriteriaDto searchCriteriaDto);
     }
 }

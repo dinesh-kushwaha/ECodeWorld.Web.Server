@@ -14,7 +14,7 @@ namespace ECodeWorld.Domain.Entities.Models
         public byte[] Timestamp { get; set; }
 
         public ApproverTypes ApproverTypes { get; set; }
-        public PostCategories PostCategories { get; set; }
+        public PostsCategories PostCategories { get; set; }
         public Users Users { get; set; }
     }
 }
